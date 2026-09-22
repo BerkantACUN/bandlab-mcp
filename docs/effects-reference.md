@@ -199,3 +199,20 @@ so `scripts/upload-audio.mjs` does the same rather than sending an mp3.
 call. The region must carry both `sampleId` and `trackId`, and `endPosition` is the audio length **in
 seconds** — see the units table above. Verified end to end: a 203.8 s upload became a playable public
 song, and the render matched the source at -14.7 LUFS and 7.5 LU.
+
+## Effects that misbehave on a full stereo mix
+
+Measured on a finished 3:24 master by bypassing one effect at a time and re-rendering. Treat these as
+warnings, not verdicts — each was tested on one song.
+
+| Effect | What it did | Evidence |
+|---|---|---|
+| `deEsser` | Acted as a broadband compressor, not a sibilance tool | bypassing it raised loudness ~5 dB and restored LRA from 5.8 to 8.1 LU. Use it on a vocal track only. |
+| `stereoSpreader` | The only configuration seen in the wild (`lowerIntensity: 0.71`, `upperIntensity: 1`) **widened** the bass | side/mid energy below 200 Hz went from −12.7 to −11.6 dB; above 4 kHz unchanged |
+| `cleanLimiter` | `threshold` behaves as drive, not ceiling | `threshold: -1` produced +1.2 dBTP (clipping). Raising `input` from −8.5 to −7 made the render 3.5 dB *quieter* — its parameters do not map onto the usual meanings |
+| `visualEq` | A −2.5 dB peaking cut at 120 Hz barely moved the measured 120 Hz band | the hump stayed at +3.4 dB until `bossGE7`'s broad low cuts went back in |
+
+`cleanLimiter`, `multibandComp2`, `visualEq` and `stereoSpreader` each appeared in only one or two
+harvested projects, so their parameter semantics are thin. `bossGE7`, `tapeSimulator` and
+`simpleStudioReverb` — seen dozens of times — behaved exactly as expected, and the best-measured master
+used only those three.
