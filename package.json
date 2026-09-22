@@ -1,6 +1,6 @@
 {
   "name": "bandlab-mcp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "MCP server for BandLab \u2014 read and prompt-edit your own songs, mixes and effect chains.",
   "type": "module",
   "bin": {

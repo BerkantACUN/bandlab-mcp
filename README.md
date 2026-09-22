@@ -162,6 +162,10 @@ when Claude Code next starts, so restart it before expecting the `bandlab_*` too
 | `bandlab_capabilities` | API base, write state, pacing, inferred value ranges |
 | `bandlab_raw_request` | Escape hatch for endpoints not yet wrapped |
 
+Audio upload is not a tool yet but is solved and scripted:
+`node scripts/upload-audio.mjs song.wav` returns a sample id you can build a song around. The protocol
+and the v2.0 auth quirk behind it are written up in [docs/effects-reference.md](docs/effects-reference.md).
+
 ### Mix operations
 
 | Group | Operations |
@@ -171,6 +175,7 @@ when Claude Code next starts, so restart it before expecting the `bandlab_*` too
 | Effects | `add_effect`, `remove_effect`, `set_effect_bypass`, `set_effect_params` |
 | Arrangement | `move_region`, `remove_region`, `set_region_pitch`, `set_region_playback_rate`, `set_region_gain`, `set_region_fade` |
 | Project | `set_bpm`, `set_key`, `set_mastering_preset`, `set_description`, `set_track_color` |
+| Automation | `automate_volume` (points given in seconds, converted to beats) |
 
 Tracks are addressable by id, by name (case-insensitive, partial allowed), or by 1-based number.
 An ambiguous name is refused with the list of matches rather than guessed at.

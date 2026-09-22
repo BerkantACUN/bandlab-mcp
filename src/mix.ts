@@ -382,6 +382,11 @@ export function describeRanges(): Record<string, string> {
     volume: `${VOLUME_MIN}..${VOLUME_MAX} (linear gain, 1.0 = unity; inferred, not documented by BandLab)`,
     pan: `${PAN_MIN}..${PAN_MAX} (-1 hard left, +1 hard right; inferred)`,
     pitchShift: `${PITCH_SHIFT_MIN}..${PITCH_SHIFT_MAX} semitones (inferred)`,
-    positions: 'startPosition/endPosition are in BandLab beat units, not seconds',
+    regionPositions:
+      'startPosition/endPosition are in SECONDS (verified: a region ending at 123.76 renders a ' +
+      '123.9 s song), despite the project also carrying a tempo',
+    automationPositions:
+      'automation lane positions are in BEATS, unlike regions — verified by writing 102.1 at ' +
+      '87 BPM and measuring the change land at 70.4 s',
   };
 }

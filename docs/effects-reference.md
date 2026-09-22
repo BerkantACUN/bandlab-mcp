@@ -110,13 +110,24 @@ Tracks reference it per-track:
 **`sendLevel` is lowercase.** The community OpenAPI spec spells it `SendLevel`; that is wrong, and
 writing the capitalised key adds a field BandLab ignores.
 
+## Units: regions and automation disagree
+
+This caught me out, so it is worth stating plainly:
+
+| Field | Unit | How it was verified |
+|---|---|---|
+| `region.startPosition` / `endPosition` | **seconds** | a region ending at `123.76` renders a 123.9 s song; setting `295.51` on a 203.8 s file produced 295.6 s of audio with 92 s of silence |
+| `automation.volume[].position` | **beats** | writing `102.1` at 87 BPM put the change at 70.4 s |
+
+A project carries `metronome.bpm`, which makes the region numbers look like beats. They are not.
+
 ## Volume automation
 
 ```json
 "automation": { "volume": [ {"position": 97.14, "value": 1}, {"position": 97.86, "value": 0} ] }
 ```
 
-`position` is in beats, `value` is linear gain on the same 0..2 scale as the fader. Values of exactly
+`position` is in **beats** — unlike region positions, which are in seconds. `value` is linear gain on the same 0..2 scale as the fader. Values of exactly
 `0` appear in real projects, so a full mute is legitimate. `automate_volume` takes seconds and converts
 using `metronome.bpm`, because people describe moments as "the drop at 1:12".
 
@@ -151,7 +162,7 @@ meaningful — `patterns` and `samplerKit` only appear on instrument tracks.
 ```jsonc
 {
   "id": "...", "trackId": "...", "sampleId": "...", "name": "Release_90_SoftKeys_Bm_4bar",
-  "startPosition": 0, "endPosition": 76.596,   // beat units, not seconds
+  "startPosition": 0, "endPosition": 76.596,   // SECONDS, not beats
   "sampleOffset": 0, "loopLength": 0,
   "playbackRate": 1.567, "pitchShift": 0, "pitchTimeCorrection": true,
   "gain": 1, "fadeIn": 0, "fadeOut": 0
@@ -160,3 +171,31 @@ meaningful — `patterns` and `samplerKit` only appear on instrument tracks.
 
 `gain`, `fadeIn`, `fadeOut` and `pitchTimeCorrection` are all absent from the community spec and were
 found only by reading live data.
+
+## Uploading audio
+
+Not part of v1.3 at all — uploads live on `v2.0`, which is why they are absent from the 123-endpoint
+map. Three steps, and the first one **fails with 401 unless the request identifies itself as the web
+client**; a valid bearer token alone is refused:
+
+```http
+PUT /api/v2.0/uploads/samples/{sampleId}?format=wav
+Authorization: Bearer <token>
+x-client-id: BandLab-Web
+x-client-version: 10.2.77
+X-Amz-Meta-User-Id: <your user id>
+```
+
+That returns `{ "value": "<presigned S3 URL>" }`. Then `PUT` the raw bytes to that URL with a matching
+`Content-Type`, and the sample exists. `GET /api/v2.0/uploads/{sampleId}` returns 404 until a revision
+references the sample, so do not poll it as a completion check — post the revision instead.
+
+`sampleId` is a client-generated UUID. The editor decodes every non-MIDI file to WAV before uploading,
+so `scripts/upload-audio.mjs` does the same rather than sending an mp3.
+
+### Creating a song around it
+
+`POST /revisions` with `song: { name }` and no song id creates the song, the post and the track in one
+call. The region must carry both `sampleId` and `trackId`, and `endPosition` is the audio length **in
+seconds** — see the units table above. Verified end to end: a 203.8 s upload became a playable public
+song, and the render matched the source at -14.7 LUFS and 7.5 LU.
