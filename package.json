@@ -1,0 +1,60 @@
+{
+  "name": "bandlab-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for BandLab \u2014 read and prompt-edit your own songs, mixes and effect chains.",
+  "type": "module",
+  "bin": {
+    "bandlab-mcp": "dist/index.js"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "scripts",
+    "docs",
+    "README.md",
+    "LICENSE",
+    ".env.example"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node --env-file-if-exists=.env dist/index.js",
+    "test": "node --test \"test/*.test.js\"",
+    "typecheck": "tsc --noEmit",
+    "verify": "npm run build && npm test",
+    "verify:live": "node --env-file-if-exists=.env scripts/verify-live.mjs",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  },
+  "license": "MIT",
+  "author": "Berkant Acun (https://github.com/BerkantACUN)",
+  "homepage": "https://github.com/BerkantACUN/bandlab-mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BerkantACUN/bandlab-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BerkantACUN/bandlab-mcp/issues"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "bandlab",
+    "music",
+    "daw",
+    "mixing",
+    "audio",
+    "claude",
+    "llm"
+  ]
+}

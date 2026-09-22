@@ -1,0 +1,2894 @@
+{
+  "harvestedOn": "2026-09-22",
+  "apiBase": "https://www.bandlab.com/api/v1.3",
+  "revisionsScanned": 50,
+  "presetsScanned": 50,
+  "note": "Slugs observed in real public projects. Absence here does not mean an effect does not exist — BandLab ships roughly 90 pedals and this only sees the ones people used in the sampled projects. Never invent a slug that is not listed.",
+  "effects": [
+    {
+      "slug": "expGate",
+      "seenInProjects": 92,
+      "trackTypes": [
+        "preset",
+        "voice",
+        "guitars",
+        "guitar"
+      ],
+      "params": {
+        "release": {
+          "kind": "number",
+          "observedMin": 0.1,
+          "observedMax": 0.8,
+          "examples": [
+            0.2,
+            0.347,
+            0.1,
+            0.25
+          ]
+        },
+        "attack": {
+          "kind": "number",
+          "observedMin": 0.001,
+          "observedMax": 0.15,
+          "examples": [
+            0.005,
+            0.02,
+            0.04,
+            0.001
+          ]
+        },
+        "threshold": {
+          "kind": "number",
+          "observedMin": -63.6,
+          "observedMax": -18,
+          "examples": [
+            -62.5,
+            -20.5,
+            -24.900000000000002,
+            -29.400000000000002
+          ]
+        }
+      }
+    },
+    {
+      "slug": "bossGE7",
+      "seenInProjects": 86,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "gainAt400Hz": {
+          "kind": "number",
+          "observedMin": -15,
+          "observedMax": 6.7,
+          "examples": [
+            -4.6000000000000005,
+            -15,
+            0.8,
+            -7.5
+          ]
+        },
+        "gainAt6400Hz": {
+          "kind": "number",
+          "observedMin": -15,
+          "observedMax": 8.3,
+          "examples": [
+            -4.2,
+            -15,
+            0.2,
+            6.800000000000001
+          ]
+        },
+        "level": {
+          "kind": "number",
+          "observedMin": -11.700000000000001,
+          "observedMax": 3.6,
+          "examples": [
+            2.9000000000000004,
+            0,
+            2.6,
+            -0.30000000000000004
+          ]
+        },
+        "gainAt200Hz": {
+          "kind": "number",
+          "observedMin": -15,
+          "observedMax": 9.3,
+          "examples": [
+            -3.7,
+            -15,
+            -1.4000000000000001,
+            3.3000000000000003
+          ]
+        },
+        "gainAt1600Hz": {
+          "kind": "number",
+          "observedMin": -4.800000000000001,
+          "observedMax": 12,
+          "examples": [
+            -2.3000000000000003,
+            11.9,
+            5.2,
+            -4.800000000000001
+          ]
+        },
+        "gainAt100Hz": {
+          "kind": "number",
+          "observedMin": -15,
+          "observedMax": 15,
+          "examples": [
+            0,
+            -15,
+            5.7,
+            15
+          ]
+        },
+        "gainAt800Hz": {
+          "kind": "number",
+          "observedMin": -6,
+          "observedMax": 8.8,
+          "examples": [
+            -4.4,
+            8.8,
+            -5.9,
+            0.5
+          ]
+        },
+        "gainAt3200Hz": {
+          "kind": "number",
+          "observedMin": -6,
+          "observedMax": 9.700000000000001,
+          "examples": [
+            0,
+            9.700000000000001,
+            0.2,
+            0.9
+          ]
+        }
+      }
+    },
+    {
+      "slug": "simpleStudioReverb",
+      "seenInProjects": 79,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "color": {
+          "kind": "number",
+          "observedMin": 0.3,
+          "observedMax": 10,
+          "examples": [
+            4.699999999999999,
+            0.8,
+            4,
+            6.1
+          ]
+        },
+        "mix": {
+          "kind": "number",
+          "observedMin": 0.1,
+          "observedMax": 10,
+          "examples": [
+            1.4000000000000001,
+            2.7,
+            3,
+            4
+          ]
+        },
+        "size": {
+          "kind": "number",
+          "observedMin": 0.6,
+          "observedMax": 10,
+          "examples": [
+            2.5,
+            3.9000000000000004,
+            5,
+            3
+          ]
+        }
+      }
+    },
+    {
+      "slug": "deEsser",
+      "seenInProjects": 78,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "threshold": {
+          "kind": "number",
+          "observedMin": -40,
+          "observedMax": 0,
+          "examples": [
+            -20.400000000000002,
+            -20.700000000000003,
+            -19.400000000000002,
+            0
+          ]
+        },
+        "frequency": {
+          "kind": "number",
+          "observedMin": 1000,
+          "observedMax": 16000,
+          "examples": [
+            13932,
+            13150,
+            13997,
+            1000
+          ]
+        }
+      }
+    },
+    {
+      "slug": "threeBandEq",
+      "seenInProjects": 72,
+      "trackTypes": [
+        "preset",
+        "voice",
+        "guitar"
+      ],
+      "params": {
+        "lowGain": {
+          "kind": "number",
+          "observedMin": -30,
+          "observedMax": 14.600000000000001,
+          "examples": [
+            -10.4,
+            -5,
+            0,
+            0.6000000000000001
+          ]
+        },
+        "midGain": {
+          "kind": "number",
+          "observedMin": -18.2,
+          "observedMax": 30,
+          "examples": [
+            -0.30000000000000004,
+            0,
+            2.4000000000000004,
+            -18.2
+          ]
+        },
+        "highGain": {
+          "kind": "number",
+          "observedMin": -30,
+          "observedMax": 30,
+          "examples": [
+            13.8,
+            19,
+            19.6,
+            11.4
+          ]
+        },
+        "midFreq": {
+          "kind": "number",
+          "observedMin": 100,
+          "observedMax": 8000,
+          "examples": [
+            2000,
+            1799,
+            238,
+            687
+          ]
+        },
+        "lowFreq": {
+          "kind": "number",
+          "observedMin": 220,
+          "observedMax": 220,
+          "examples": [
+            220
+          ]
+        },
+        "midQ": {
+          "kind": "number",
+          "observedMin": 1.2000000000000002,
+          "observedMax": 1.2000000000000002,
+          "examples": [
+            1.2000000000000002
+          ]
+        },
+        "highFreq": {
+          "kind": "number",
+          "observedMin": 7000,
+          "observedMax": 7000,
+          "examples": [
+            7000
+          ]
+        }
+      }
+    },
+    {
+      "slug": "compressor",
+      "seenInProjects": 51,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "knee": {
+          "kind": "number",
+          "observedMin": 5,
+          "observedMax": 15,
+          "examples": [
+            6.1000000000000005,
+            6,
+            5.800000000000001,
+            7
+          ]
+        },
+        "release": {
+          "kind": "number",
+          "observedMin": 0.066,
+          "observedMax": 0.533,
+          "examples": [
+            0.069,
+            0.066,
+            0.306,
+            0.222
+          ]
+        },
+        "attack": {
+          "kind": "number",
+          "observedMin": 0.001,
+          "observedMax": 0.055,
+          "examples": [
+            0.001,
+            0.018,
+            0.055,
+            0.03
+          ]
+        },
+        "ratio": {
+          "kind": "number",
+          "observedMin": 3,
+          "observedMax": 20,
+          "examples": [
+            3.9000000000000004,
+            4,
+            3,
+            12.100000000000001
+          ]
+        },
+        "threshold": {
+          "kind": "number",
+          "observedMin": -47.1,
+          "observedMax": -11,
+          "examples": [
+            -25,
+            -24.900000000000002,
+            -19.200000000000003,
+            -17.7
+          ]
+        },
+        "makeupGain": {
+          "kind": "number",
+          "observedMin": 1,
+          "observedMax": 1,
+          "examples": [
+            1
+          ]
+        }
+      }
+    },
+    {
+      "slug": "backCompr",
+      "seenInProjects": 40,
+      "trackTypes": [
+        "preset",
+        "voice",
+        "guitar"
+      ],
+      "params": {
+        "release": {
+          "kind": "number",
+          "observedMin": 0.188,
+          "observedMax": 2.754,
+          "examples": [
+            0.4,
+            0.546,
+            0.658,
+            0.373
+          ]
+        },
+        "makeupGain": {
+          "kind": "number",
+          "observedMin": 0,
+          "observedMax": 8.6,
+          "examples": [
+            4.3,
+            8.6,
+            1.5,
+            6.1000000000000005
+          ]
+        },
+        "attack": {
+          "kind": "number",
+          "observedMin": 0.001,
+          "observedMax": 0.1,
+          "examples": [
+            0.065,
+            0.017,
+            0.015,
+            0.001
+          ]
+        },
+        "ratio": {
+          "kind": "number",
+          "observedMin": 1.7000000000000002,
+          "observedMax": 20,
+          "examples": [
+            4.7,
+            20,
+            2.3000000000000003,
+            8
+          ]
+        },
+        "threshold": {
+          "kind": "number",
+          "observedMin": -10,
+          "observedMax": 20,
+          "examples": [
+            17,
+            6,
+            2.5,
+            18.500000000000004
+          ]
+        }
+      }
+    },
+    {
+      "slug": "ddelay",
+      "seenInProjects": 36,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "dry": {
+          "kind": "number",
+          "observedMin": 34,
+          "observedMax": 100,
+          "examples": [
+            100,
+            70,
+            50,
+            69
+          ]
+        },
+        "wet": {
+          "kind": "number",
+          "observedMin": 0,
+          "observedMax": 50,
+          "examples": [
+            41,
+            13,
+            50,
+            5
+          ]
+        },
+        "time": {
+          "kind": "number",
+          "observedMin": 0.01,
+          "observedMax": 1.2530000000000001,
+          "examples": [
+            0.098,
+            0.537,
+            0.06,
+            0.891
+          ]
+        },
+        "level": {
+          "kind": "number",
+          "observedMin": 0,
+          "observedMax": 7,
+          "examples": [
+            0,
+            7
+          ]
+        },
+        "regen": {
+          "kind": "number",
+          "observedMin": 0,
+          "observedMax": 100,
+          "examples": [
+            25,
+            75,
+            15,
+            100
+          ]
+        },
+        "lpf": {
+          "kind": "number",
+          "observedMin": 1200,
+          "observedMax": 16000,
+          "examples": [
+            2398,
+            2000,
+            1200,
+            6500
+          ]
+        },
+        "hpf": {
+          "kind": "number",
+          "observedMin": 235,
+          "observedMax": 1200,
+          "examples": [
+            235,
+            500,
+            593,
+            1200
+          ]
+        },
+        "stereo": {
+          "kind": "number",
+          "observedMin": 1,
+          "observedMax": 1,
+          "examples": [
+            1
+          ]
+        }
+      }
+    },
+    {
+      "slug": "la2aCompr",
+      "seenInProjects": 36,
+      "trackTypes": [
+        "preset",
+        "voice",
+        "guitar"
+      ],
+      "params": {
+        "makeupGain": {
+          "kind": "number",
+          "observedMin": 0,
+          "observedMax": 15,
+          "examples": [
+            5.100000000000001,
+            9.000000000000002,
+            5.699999999999998,
+            5.400000000000002
+          ]
+        },
+        "mode": {
+          "kind": "string",
+          "examples": [
+            "limit",
+            "compress"
+          ]
+        },
+        "threshold": {
+          "kind": "number",
+          "observedMin": 1,
+          "observedMax": 40,
+          "examples": [
+            9.5,
+            22.5,
+            20,
+            26
+          ]
+        }
+      }
+    },
+    {
+      "slug": "ddelayPlus2",
+      "seenInProjects": 22,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "dry": {
+          "kind": "number",
+          "observedMin": 0.39,
+          "observedMax": 1,
+          "examples": [
+            1,
+            0.61,
+            0.5,
+            0.39
+          ]
+        },
+        "delayTimeMsec": {
+          "kind": "number",
+          "observedMin": 0.01,
+          "observedMax": 0.513,
+          "examples": [
+            0.45,
+            0.1,
+            0.14500000000000002,
+            0.513
+          ]
+        },
+        "lpf": {
+          "kind": "number",
+          "observedMin": 2003,
+          "observedMax": 16000,
+          "examples": [
+            2003,
+            2567,
+            10052,
+            6448
+          ]
+        },
+        "spread": {
+          "kind": "number",
+          "observedMin": 0.3,
+          "observedMax": 1,
+          "examples": [
+            0.862,
+            0.4,
+            0.3,
+            1
+          ]
+        },
+        "wet": {
+          "kind": "number",
+          "observedMin": 0.08,
+          "observedMax": 0.5,
+          "examples": [
+            0.15,
+            0.3,
+            0.25,
+            0.08
+          ]
+        },
+        "feedback": {
+          "kind": "number",
+          "observedMin": 0.005,
+          "observedMax": 0.19,
+          "examples": [
+            0.1,
+            0.165,
+            0.005,
+            0.045
+          ]
+        },
+        "delayUnitSelection": {
+          "kind": "string",
+          "examples": [
+            "delayTimeBeats",
+            "delayTimeMsec"
+          ]
+        },
+        "level": {
+          "kind": "number",
+          "observedMin": -12,
+          "observedMax": 0,
+          "examples": [
+            0,
+            -12
+          ]
+        },
+        "delayTimeBeats": {
+          "kind": "string",
+          "examples": [
+            "quarterNote",
+            "sixteenthNoteTriplet"
+          ]
+        },
+        "hpf": {
+          "kind": "number",
+          "observedMin": 50,
+          "observedMax": 450,
+          "examples": [
+            146,
+            169,
+            450,
+            208
+          ]
+        }
+      }
+    },
+    {
+      "slug": "reverbHybrid",
+      "seenInProjects": 13,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "spread": {
+          "kind": "number",
+          "observedMin": 4.4,
+          "observedMax": 7.9,
+          "examples": [
+            5.4,
+            6.1000000000000005,
+            7.9,
+            4.4
+          ]
+        },
+        "dryWetMix": {
+          "kind": "number",
+          "observedMin": 0.2,
+          "observedMax": 0.65,
+          "examples": [
+            0.33,
+            0.31,
+            0.65,
+            0.22
+          ]
+        },
+        "irType": {
+          "kind": "string",
+          "examples": [
+            "chamberShort",
+            "longPlateShort",
+            "roomShort",
+            "basic"
+          ]
+        },
+        "dampening": {
+          "kind": "number",
+          "observedMin": 3292,
+          "observedMax": 16000,
+          "examples": [
+            7775,
+            8001,
+            3292,
+            7500
+          ]
+        },
+        "roomSize": {
+          "kind": "number",
+          "observedMin": 1.2000000000000002,
+          "observedMax": 8.4,
+          "examples": [
+            6.800000000000001,
+            1.2000000000000002,
+            7,
+            2.1
+          ]
+        }
+      }
+    },
+    {
+      "slug": "dimensionD",
+      "seenInProjects": 13,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "preset": {
+          "kind": "string",
+          "examples": [
+            "01",
+            "04",
+            "02",
+            "03"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "antiSqueal",
+      "seenInProjects": 10,
+      "trackTypes": [
+        "voice",
+        "guitars",
+        "guitar"
+      ],
+      "params": {
+        "amount": {
+          "kind": "number",
+          "observedMin": 0.07,
+          "observedMax": 0.62,
+          "examples": [
+            0.17,
+            0.62,
+            0.5,
+            0.07
+          ]
+        }
+      }
+    },
+    {
+      "slug": "ddelayPlus",
+      "seenInProjects": 9,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "dry": {
+          "kind": "number",
+          "observedMin": 1,
+          "observedMax": 1,
+          "examples": [
+            1
+          ]
+        },
+        "delayTimeMsec": {
+          "kind": "number",
+          "observedMin": 0.44997093046732306,
+          "observedMax": 0.45,
+          "examples": [
+            0.45,
+            0.44997093046732306
+          ]
+        },
+        "lpf": {
+          "kind": "number",
+          "observedMin": 1200,
+          "observedMax": 8918,
+          "examples": [
+            2490,
+            6832,
+            8185,
+            8918
+          ]
+        },
+        "spread": {
+          "kind": "number",
+          "observedMin": 0.5,
+          "observedMax": 0.85,
+          "examples": [
+            0.85,
+            0.8030000000000002,
+            0.5,
+            0.6
+          ]
+        },
+        "wet": {
+          "kind": "number",
+          "observedMin": 0.07,
+          "observedMax": 0.5,
+          "examples": [
+            0.27,
+            0.11,
+            0.12,
+            0.07
+          ]
+        },
+        "feedback": {
+          "kind": "number",
+          "observedMin": 0.1,
+          "observedMax": 0.37,
+          "examples": [
+            0.15,
+            0.1,
+            0.37,
+            0.19
+          ]
+        },
+        "delayUnitSelection": {
+          "kind": "string",
+          "examples": [
+            "delayTimeBeats"
+          ]
+        },
+        "level": {
+          "kind": "number",
+          "observedMin": 0,
+          "observedMax": 2,
+          "examples": [
+            2,
+            0
+          ]
+        },
+        "delayTimeBeats": {
+          "kind": "string",
+          "examples": [
+            "halfNote",
+            "quarterNote",
+            "sixteenthNoteTriplet"
+          ]
+        },
+        "hpf": {
+          "kind": "number",
+          "observedMin": 50,
+          "observedMax": 659,
+          "examples": [
+            50,
+            198,
+            202,
+            659
+          ]
+        }
+      }
+    },
+    {
+      "slug": "univerb",
+      "seenInProjects": 9,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "dryWetMix": {
+          "kind": "number",
+          "observedMin": 0.03,
+          "observedMax": 0.56,
+          "examples": [
+            0.27,
+            0.53,
+            0.05,
+            0.56
+          ]
+        },
+        "irType": {
+          "kind": "string",
+          "examples": [
+            "womensInstitute",
+            "drumBooth2",
+            "studentUnionStairwellTop",
+            "classroom"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "compr1176",
+      "seenInProjects": 9,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "release": {
+          "kind": "number",
+          "observedMin": 0,
+          "observedMax": 7.5,
+          "examples": [
+            7.5,
+            3.7,
+            2.8000000000000003,
+            5
+          ]
+        },
+        "makeup": {
+          "kind": "number",
+          "observedMin": -4,
+          "observedMax": 2.9000000000000004,
+          "examples": [
+            0,
+            1.1,
+            -4,
+            2.9000000000000004
+          ]
+        },
+        "attack": {
+          "kind": "number",
+          "observedMin": 0.9,
+          "observedMax": 6.300000000000001,
+          "examples": [
+            5,
+            1.4000000000000001,
+            0.9,
+            1.2000000000000002
+          ]
+        },
+        "ratio": {
+          "kind": "string",
+          "examples": [
+            "4",
+            "8",
+            "12"
+          ]
+        },
+        "gain": {
+          "kind": "number",
+          "observedMin": 1.5,
+          "observedMax": 18.6,
+          "examples": [
+            10,
+            11.100000000000001,
+            8.3,
+            18.6
+          ]
+        }
+      }
+    },
+    {
+      "slug": "overdrive",
+      "seenInProjects": 9,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "amount": {
+          "kind": "number",
+          "observedMin": 0,
+          "observedMax": 4.4,
+          "examples": [
+            0,
+            0.2,
+            0.5,
+            4.4
+          ]
+        },
+        "outputGain": {
+          "kind": "number",
+          "observedMin": 3.2,
+          "observedMax": 7,
+          "examples": [
+            5,
+            4.9,
+            7,
+            4.5
+          ]
+        },
+        "tone": {
+          "kind": "number",
+          "observedMin": 3261,
+          "observedMax": 16000,
+          "examples": [
+            14444,
+            16000,
+            5072,
+            9205
+          ]
+        }
+      }
+    },
+    {
+      "slug": "filter",
+      "seenInProjects": 9,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "gain": {
+          "kind": "number",
+          "observedMin": -5.4,
+          "observedMax": 12.4,
+          "examples": [
+            -5.4,
+            7,
+            0,
+            12.4
+          ]
+        },
+        "frequency": {
+          "kind": "number",
+          "observedMin": 98,
+          "observedMax": 12000,
+          "examples": [
+            7866,
+            12000,
+            98,
+            654
+          ]
+        },
+        "q": {
+          "kind": "number",
+          "observedMin": 0,
+          "observedMax": 7.800000000000001,
+          "examples": [
+            0,
+            4.5,
+            0.6000000000000001,
+            3.3000000000000003
+          ]
+        },
+        "filterType": {
+          "kind": "string",
+          "examples": [
+            "peaking",
+            "highshelf",
+            "bandpass"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "pitchShifter",
+      "seenInProjects": 8,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "inputType": {
+          "kind": "string",
+          "examples": [
+            "vocal",
+            "percussion"
+          ]
+        },
+        "mix": {
+          "kind": "number",
+          "observedMin": 0.07,
+          "observedMax": 1,
+          "examples": [
+            0.07,
+            0.5755,
+            1
+          ]
+        },
+        "shift": {
+          "kind": "number",
+          "observedMin": -12,
+          "observedMax": 12,
+          "examples": [
+            -1.0000000000000004,
+            -12,
+            0,
+            12
+          ]
+        }
+      }
+    },
+    {
+      "slug": "beatSyncDelay2",
+      "seenInProjects": 8,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "delayTime": {
+          "kind": "number",
+          "observedMin": 0.06,
+          "observedMax": 0.655,
+          "examples": [
+            0.2,
+            0.06,
+            0.655,
+            0.195
+          ]
+        },
+        "delayUnitSelection": {
+          "kind": "string",
+          "examples": [
+            "syncDelay",
+            "delayTime"
+          ]
+        },
+        "dryWetMix": {
+          "kind": "number",
+          "observedMin": 0.05,
+          "observedMax": 0.3,
+          "examples": [
+            0.23,
+            0.06,
+            0.3,
+            0.08
+          ]
+        },
+        "cutoff": {
+          "kind": "number",
+          "observedMin": 888,
+          "observedMax": 16000,
+          "examples": [
+            888,
+            2017,
+            16000,
+            12000
+          ]
+        },
+        "feedback": {
+          "kind": "number",
+          "observedMin": 0.085,
+          "observedMax": 0.544,
+          "examples": [
+            0.1105,
+            0.085,
+            0.14450000000000002,
+            0.136
+          ]
+        },
+        "syncDelay": {
+          "kind": "string",
+          "examples": [
+            "quarterNote",
+            "quarterNoteTriplet",
+            "halfNote",
+            "eighthNote"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "pingpongDelay",
+      "seenInProjects": 7,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "cutoff": {
+          "kind": "number",
+          "observedMin": 1500,
+          "observedMax": 8247,
+          "examples": [
+            5009,
+            3460,
+            8247,
+            1500
+          ]
+        },
+        "spread": {
+          "kind": "number",
+          "observedMin": 0.19,
+          "observedMax": 0.9,
+          "examples": [
+            0.84,
+            0.19,
+            0.8,
+            0.9
+          ]
+        },
+        "delayOffsetUnitSelection": {
+          "kind": "string",
+          "examples": [
+            "delayOffsetBeats"
+          ]
+        },
+        "delayOffsetBeats": {
+          "kind": "string",
+          "examples": [
+            "quarterNote",
+            "halfNote",
+            "quarterNoteTriplet"
+          ]
+        },
+        "delayOffsetSec": {
+          "kind": "number",
+          "observedMin": 0.35,
+          "observedMax": 0.35,
+          "examples": [
+            0.35
+          ]
+        },
+        "delayTimeSec": {
+          "kind": "number",
+          "observedMin": 0.001,
+          "observedMax": 0.7,
+          "examples": [
+            0.7,
+            0.001
+          ]
+        },
+        "delayUnitSelection": {
+          "kind": "string",
+          "examples": [
+            "delayTimeBeats"
+          ]
+        },
+        "dryWetMix": {
+          "kind": "number",
+          "observedMin": 0.1,
+          "observedMax": 0.18,
+          "examples": [
+            0.17,
+            0.18,
+            0.1,
+            0.15
+          ]
+        },
+        "feedback": {
+          "kind": "number",
+          "observedMin": 0.017,
+          "observedMax": 0.2125,
+          "examples": [
+            0.11900000000000001,
+            0.2125,
+            0.017
+          ]
+        },
+        "delayTimeBeats": {
+          "kind": "string",
+          "examples": [
+            "quarterNote",
+            "halfNote",
+            "quarterNoteTriplet"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "delay",
+      "seenInProjects": 6,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "delayTime": {
+          "kind": "number",
+          "observedMin": 0.565,
+          "observedMax": 0.739,
+          "examples": [
+            0.565,
+            0.739
+          ]
+        },
+        "dryWetMix": {
+          "kind": "number",
+          "observedMin": 0.12,
+          "observedMax": 0.23,
+          "examples": [
+            0.12,
+            0.23
+          ]
+        },
+        "cutoff": {
+          "kind": "number",
+          "observedMin": 2500,
+          "observedMax": 2500,
+          "examples": [
+            2500
+          ]
+        },
+        "feedback": {
+          "kind": "number",
+          "observedMin": 0.204,
+          "observedMax": 0.204,
+          "examples": [
+            0.204
+          ]
+        }
+      }
+    },
+    {
+      "slug": "bossCE5",
+      "seenInProjects": 6,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "depth": {
+          "kind": "number",
+          "observedMin": 1.8,
+          "observedMax": 8.4,
+          "examples": [
+            1.8,
+            4.800000000000001,
+            8.4,
+            3.1
+          ]
+        },
+        "high": {
+          "kind": "number",
+          "observedMin": 2,
+          "observedMax": 9,
+          "examples": [
+            2,
+            6.6000000000000005,
+            9,
+            3.4
+          ]
+        },
+        "low": {
+          "kind": "number",
+          "observedMin": 0,
+          "observedMax": 9,
+          "examples": [
+            3.6,
+            3,
+            9,
+            0
+          ]
+        },
+        "speed": {
+          "kind": "number",
+          "observedMin": 1.0090000000000001,
+          "observedMax": 2.3890000000000002,
+          "examples": [
+            1.147,
+            1.0090000000000001,
+            1.0780000000000003,
+            2.3890000000000002
+          ]
+        },
+        "wet": {
+          "kind": "number",
+          "observedMin": 1,
+          "observedMax": 8.5,
+          "examples": [
+            1,
+            4.7,
+            8.5,
+            1.4
+          ]
+        }
+      }
+    },
+    {
+      "slug": "guitarCab",
+      "seenInProjects": 5,
+      "trackTypes": [
+        "preset",
+        "guitars",
+        "guitar",
+        "voice"
+      ],
+      "params": {
+        "micModel": {
+          "kind": "string",
+          "examples": [
+            "shureSM57"
+          ]
+        },
+        "micPosition": {
+          "kind": "string",
+          "examples": [
+            "offAxis",
+            "onAxis"
+          ]
+        },
+        "cabModel": {
+          "kind": "string",
+          "examples": [
+            "4x12CelestionVintage30",
+            "4x12MesaBoogie",
+            "8x10Ampeg"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "springReverb2",
+      "seenInProjects": 5,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "mode": {
+          "kind": "string",
+          "examples": [
+            "medium",
+            "long"
+          ]
+        },
+        "intensity": {
+          "kind": "number",
+          "observedMin": 20,
+          "observedMax": 60,
+          "examples": [
+            41.2,
+            20,
+            60
+          ]
+        }
+      }
+    },
+    {
+      "slug": "enhancer",
+      "seenInProjects": 5,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "mode": {
+          "kind": "string",
+          "examples": [
+            "warm",
+            "general",
+            "standard",
+            "modern"
+          ]
+        },
+        "dryWetMix": {
+          "kind": "number",
+          "observedMin": 0.1,
+          "observedMax": 0.5,
+          "examples": [
+            0.5,
+            0.1,
+            0.16,
+            0.15
+          ]
+        }
+      }
+    },
+    {
+      "slug": "lofi",
+      "seenInProjects": 5,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "dryWetMix": {
+          "kind": "number",
+          "observedMin": 0.35,
+          "observedMax": 0.7,
+          "examples": [
+            0.35,
+            0.7
+          ]
+        },
+        "downsample": {
+          "kind": "number",
+          "observedMin": 9.256197192468743,
+          "observedMax": 13.412344438055841,
+          "examples": [
+            9.256197192468743,
+            13.412344438055841
+          ]
+        },
+        "bitDepth": {
+          "kind": "number",
+          "observedMin": 16,
+          "observedMax": 16,
+          "examples": [
+            16
+          ]
+        }
+      }
+    },
+    {
+      "slug": "genericAmp",
+      "seenInProjects": 4,
+      "trackTypes": [
+        "preset",
+        "guitars",
+        "guitar",
+        "voice"
+      ],
+      "params": {
+        "treble": {
+          "kind": "number",
+          "observedMin": 5,
+          "observedMax": 6.800000000000001,
+          "examples": [
+            5,
+            6.800000000000001
+          ]
+        },
+        "volume": {
+          "kind": "number",
+          "observedMin": 5,
+          "observedMax": 6,
+          "examples": [
+            5,
+            6
+          ]
+        },
+        "drive": {
+          "kind": "number",
+          "observedMin": 5.300000000000001,
+          "observedMax": 7.4,
+          "examples": [
+            5.300000000000001,
+            7.4
+          ]
+        },
+        "bass": {
+          "kind": "number",
+          "observedMin": 3.7,
+          "observedMax": 5.4,
+          "examples": [
+            5.4,
+            3.7
+          ]
+        },
+        "mid": {
+          "kind": "number",
+          "observedMin": 2.3000000000000003,
+          "observedMax": 10,
+          "examples": [
+            2.3000000000000003,
+            10
+          ]
+        },
+        "presence": {
+          "kind": "number",
+          "observedMin": 2.1,
+          "observedMax": 7.1000000000000005,
+          "examples": [
+            7.1000000000000005,
+            2.1
+          ]
+        },
+        "staticModel": {
+          "kind": "string",
+          "examples": [
+            "mesaDualRectCH3"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "compander",
+      "seenInProjects": 4,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "expThreshold": {
+          "kind": "number",
+          "observedMin": -80,
+          "observedMax": -40.2,
+          "examples": [
+            -40.400000000000006,
+            -41.2,
+            -40.2,
+            -80
+          ]
+        },
+        "makeupGain": {
+          "kind": "number",
+          "observedMin": 1.56,
+          "observedMax": 5.43,
+          "examples": [
+            5.43,
+            1.56,
+            3
+          ]
+        },
+        "comprThreshold": {
+          "kind": "number",
+          "observedMin": -18,
+          "observedMax": 31.200000000000003,
+          "examples": [
+            -18,
+            31.200000000000003,
+            -10.700000000000001
+          ]
+        },
+        "mode": {
+          "kind": "string",
+          "examples": [
+            "dynamic",
+            "compressedGater",
+            "brokenSpeaker"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "autoFilter",
+      "seenInProjects": 4,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "frequency": {
+          "kind": "number",
+          "observedMin": 2000,
+          "observedMax": 6125,
+          "examples": [
+            2000,
+            6125
+          ]
+        },
+        "lfoRateUnitSelection": {
+          "kind": "string",
+          "examples": [
+            "syncLfoRate"
+          ]
+        },
+        "drive": {
+          "kind": "number",
+          "observedMin": 0.6,
+          "observedMax": 4.2,
+          "examples": [
+            4.2,
+            1.77,
+            0.6
+          ]
+        },
+        "syncLfoRate": {
+          "kind": "string",
+          "examples": [
+            "sixteenthNoteTriplet",
+            "eighthNote",
+            "halfNote"
+          ]
+        },
+        "filterType": {
+          "kind": "string",
+          "examples": [
+            "lpf"
+          ]
+        },
+        "resonance": {
+          "kind": "number",
+          "observedMin": 1,
+          "observedMax": 4.4,
+          "examples": [
+            1,
+            4.4
+          ]
+        },
+        "sensitivity": {
+          "kind": "number",
+          "observedMin": 2.2,
+          "observedMax": 3.6,
+          "examples": [
+            3.6,
+            2.2
+          ]
+        },
+        "lfoRate": {
+          "kind": "number",
+          "observedMin": 3,
+          "observedMax": 3,
+          "examples": [
+            3
+          ]
+        },
+        "lfoDepth": {
+          "kind": "number",
+          "observedMin": 0,
+          "observedMax": 0.2,
+          "examples": [
+            0,
+            0.2,
+            0.1
+          ]
+        }
+      }
+    },
+    {
+      "slug": "gain2",
+      "seenInProjects": 4,
+      "trackTypes": [
+        "voice"
+      ],
+      "params": {
+        "gain": {
+          "kind": "number",
+          "observedMin": 20,
+          "observedMax": 20,
+          "examples": [
+            20
+          ]
+        }
+      }
+    },
+    {
+      "slug": "tubeScreamer",
+      "seenInProjects": 3,
+      "trackTypes": [
+        "preset",
+        "guitars",
+        "guitar"
+      ],
+      "params": {
+        "drive": {
+          "kind": "number",
+          "observedMin": 4,
+          "observedMax": 6.9,
+          "examples": [
+            6.9,
+            4
+          ]
+        },
+        "level": {
+          "kind": "number",
+          "observedMin": 6,
+          "observedMax": 9.5,
+          "examples": [
+            9.5,
+            6
+          ]
+        },
+        "mode": {
+          "kind": "string",
+          "examples": [
+            "overdrive"
+          ]
+        },
+        "tone": {
+          "kind": "number",
+          "observedMin": 6.5,
+          "observedMax": 9.5,
+          "examples": [
+            9.5,
+            6.5
+          ]
+        }
+      }
+    },
+    {
+      "slug": "chorus",
+      "seenInProjects": 3,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "depth": {
+          "kind": "number",
+          "observedMin": 0.78,
+          "observedMax": 1,
+          "examples": [
+            0.78,
+            1
+          ]
+        },
+        "rate": {
+          "kind": "number",
+          "observedMin": 0.01486775437051354,
+          "observedMax": 0.4643984379003458,
+          "examples": [
+            0.4643984379003458,
+            0.01486775437051354
+          ]
+        }
+      }
+    },
+    {
+      "slug": "phaser",
+      "seenInProjects": 3,
+      "trackTypes": [
+        "voice"
+      ],
+      "params": {
+        "rate": {
+          "kind": "number",
+          "observedMin": 0.7210702731057497,
+          "observedMax": 0.8811914837748411,
+          "examples": [
+            0.7210702731057497,
+            0.8811914837748411
+          ]
+        }
+      }
+    },
+    {
+      "slug": "tubeScreamer2",
+      "seenInProjects": 2,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "drive": {
+          "kind": "number",
+          "observedMin": 0,
+          "observedMax": 0,
+          "examples": [
+            0
+          ]
+        },
+        "level": {
+          "kind": "number",
+          "observedMin": 8.200000000000001,
+          "observedMax": 8.200000000000001,
+          "examples": [
+            8.200000000000001
+          ]
+        },
+        "mid": {
+          "kind": "number",
+          "observedMin": 5.800000000000001,
+          "observedMax": 5.800000000000001,
+          "examples": [
+            5.800000000000001
+          ]
+        }
+      }
+    },
+    {
+      "slug": "bossVB2",
+      "seenInProjects": 2,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "amount": {
+          "kind": "number",
+          "observedMin": 21.000000000000004,
+          "observedMax": 30,
+          "examples": [
+            21.000000000000004,
+            30
+          ]
+        },
+        "speed": {
+          "kind": "number",
+          "observedMin": 3.1700000000000004,
+          "observedMax": 6.338,
+          "examples": [
+            6.338,
+            3.1700000000000004
+          ]
+        }
+      }
+    },
+    {
+      "slug": "tremolo",
+      "seenInProjects": 2,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "depth": {
+          "kind": "number",
+          "observedMin": 0.7,
+          "observedMax": 0.765,
+          "examples": [
+            0.765,
+            0.7
+          ]
+        },
+        "spread": {
+          "kind": "number",
+          "observedMin": 52.2,
+          "observedMax": 157.10000000000002,
+          "examples": [
+            157.10000000000002,
+            52.2
+          ]
+        },
+        "rate": {
+          "kind": "number",
+          "observedMin": 0.39639489864604605,
+          "observedMax": 4.003992523337889,
+          "examples": [
+            0.39639489864604605,
+            4.003992523337889
+          ]
+        }
+      }
+    },
+    {
+      "slug": "multibandComp2",
+      "seenInProjects": 2,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "band3_release": {
+          "kind": "number",
+          "observedMin": 1,
+          "observedMax": 50,
+          "examples": [
+            50,
+            1
+          ]
+        },
+        "band1_makeupGain": {
+          "kind": "number",
+          "observedMin": 0,
+          "observedMax": 0,
+          "examples": [
+            0
+          ]
+        },
+        "band1_release": {
+          "kind": "number",
+          "observedMin": 50,
+          "observedMax": 50,
+          "examples": [
+            50
+          ]
+        },
+        "band1_threshold": {
+          "kind": "number",
+          "observedMin": -17.8,
+          "observedMax": -5.800000000000001,
+          "examples": [
+            -5.800000000000001,
+            -17.8
+          ]
+        },
+        "band2_attack": {
+          "kind": "number",
+          "observedMin": 17.8,
+          "observedMax": 50,
+          "examples": [
+            50,
+            17.8
+          ]
+        },
+        "band2_makeupGain": {
+          "kind": "number",
+          "observedMin": -1.4500000000000046,
+          "observedMax": 0,
+          "examples": [
+            0,
+            -1.4500000000000046
+          ]
+        },
+        "band1_attack": {
+          "kind": "number",
+          "observedMin": 50,
+          "observedMax": 50,
+          "examples": [
+            50
+          ]
+        },
+        "band3_ratio": {
+          "kind": "number",
+          "observedMin": 4,
+          "observedMax": 4.4,
+          "examples": [
+            4.4,
+            4
+          ]
+        },
+        "main_inputGain": {
+          "kind": "number",
+          "observedMin": 0,
+          "observedMax": 0,
+          "examples": [
+            0
+          ]
+        },
+        "band0_solo": {
+          "kind": "boolean",
+          "examples": [
+            false
+          ]
+        },
+        "band0_attack": {
+          "kind": "number",
+          "observedMin": 28.700000000000006,
+          "observedMax": 50,
+          "examples": [
+            50,
+            28.700000000000006
+          ]
+        },
+        "band1_solo": {
+          "kind": "boolean",
+          "examples": [
+            false
+          ]
+        },
+        "band2_solo": {
+          "kind": "boolean",
+          "examples": [
+            false
+          ]
+        },
+        "band3_solo": {
+          "kind": "boolean",
+          "examples": [
+            false
+          ]
+        },
+        "band0_makeupGain": {
+          "kind": "number",
+          "observedMin": 0,
+          "observedMax": 0,
+          "examples": [
+            0
+          ]
+        },
+        "crossover0": {
+          "kind": "number",
+          "observedMin": 201,
+          "observedMax": 309,
+          "examples": [
+            201,
+            309
+          ]
+        },
+        "crossover1": {
+          "kind": "number",
+          "observedMin": 1002,
+          "observedMax": 2000,
+          "examples": [
+            1002,
+            2000
+          ]
+        },
+        "band2_release": {
+          "kind": "number",
+          "observedMin": 50,
+          "observedMax": 87.60000000000001,
+          "examples": [
+            50,
+            87.60000000000001
+          ]
+        },
+        "band0_ratio": {
+          "kind": "number",
+          "observedMin": 4,
+          "observedMax": 4.4,
+          "examples": [
+            4.4,
+            4
+          ]
+        },
+        "crossover2": {
+          "kind": "number",
+          "observedMin": 4629,
+          "observedMax": 11930,
+          "examples": [
+            4629,
+            11930
+          ]
+        },
+        "band0_threshold": {
+          "kind": "number",
+          "observedMin": -24,
+          "observedMax": 0,
+          "examples": [
+            0,
+            -24
+          ]
+        },
+        "band0_release": {
+          "kind": "number",
+          "observedMin": 50,
+          "observedMax": 78.30000000000001,
+          "examples": [
+            50,
+            78.30000000000001
+          ]
+        },
+        "band1_ratio": {
+          "kind": "number",
+          "observedMin": 4,
+          "observedMax": 4,
+          "examples": [
+            4
+          ]
+        },
+        "band3_makeupGain": {
+          "kind": "number",
+          "observedMin": 0,
+          "observedMax": 4.090000000000007,
+          "examples": [
+            0,
+            4.090000000000007
+          ]
+        },
+        "band3_threshold": {
+          "kind": "number",
+          "observedMin": -24,
+          "observedMax": -5.1000000000000005,
+          "examples": [
+            -5.1000000000000005,
+            -24
+          ]
+        },
+        "main_outputGain": {
+          "kind": "number",
+          "observedMin": 0,
+          "observedMax": 2.9800000000000004,
+          "examples": [
+            0,
+            2.9800000000000004
+          ]
+        },
+        "band2_ratio": {
+          "kind": "number",
+          "observedMin": 4,
+          "observedMax": 4,
+          "examples": [
+            4
+          ]
+        },
+        "band2_threshold": {
+          "kind": "number",
+          "observedMin": -23.700000000000003,
+          "observedMax": 0,
+          "examples": [
+            0,
+            -23.700000000000003
+          ]
+        },
+        "band3_attack": {
+          "kind": "number",
+          "observedMin": 1,
+          "observedMax": 50,
+          "examples": [
+            50,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "slug": "bossBD2",
+      "seenInProjects": 2,
+      "trackTypes": [
+        "preset"
+      ],
+      "params": {
+        "drive": {
+          "kind": "number",
+          "observedMin": 0,
+          "observedMax": 5.4,
+          "examples": [
+            0,
+            5.4
+          ]
+        },
+        "level": {
+          "kind": "number",
+          "observedMin": 6,
+          "observedMax": 8.5,
+          "examples": [
+            8.5,
+            6
+          ]
+        },
+        "mid": {
+          "kind": "number",
+          "observedMin": 10,
+          "observedMax": 10,
+          "examples": [
+            10
+          ]
+        }
+      }
+    },
+    {
+      "slug": "tapeSimulator",
+      "seenInProjects": 2,
+      "trackTypes": [
+        "preset",
+        "voice"
+      ],
+      "params": {
+        "bias": {
+          "kind": "number",
+          "observedMin": 15.5,
+          "observedMax": 80,
+          "examples": [
+            80,
+            15.5
+          ]
+        },
+        "drive": {
+          "kind": "number",
+          "observedMin": 1.872,
+          "observedMax": 2.268,
+          "examples": [
+            2.268,
+            1.872
+          ]
+        },
+        "level": {
+          "kind": "number",
+          "observedMin": -1,
+          "observedMax": 3.9000000000000004,
+          "examples": [
+            -1,
+            3.9000000000000004
+          ]
+        },
+        "speed": {
+          "kind": "number",
+          "observedMin": 12.969999999999999,
+          "observedMax": 18.6554,
+          "examples": [
+            18.6554,
+            12.969999999999999
+          ]
+        },
+        "wow": {
+          "kind": "number",
+          "observedMin": 30,
+          "observedMax": 64.3,
+          "examples": [
+            64.3,
+            30
+          ]
+        }
+      }
+    },
+    {
+      "slug": "oneKnobRoom",
+      "seenInProjects": 2,
+      "trackTypes": [
+        "voice"
+      ],
+      "params": {
+        "intensity": {
+          "kind": "number",
+          "observedMin": 24,
+          "observedMax": 100,
+          "examples": [
+            24,
+            100
+          ]
+        }
+      }
+    },
+    {
+      "slug": "autoWah",
+      "seenInProjects": 1,
+      "trackTypes": [
+        "preset"
+      ],
+      "params": {
+        "depth": {
+          "kind": "number",
+          "observedMin": 13,
+          "observedMax": 13,
+          "examples": [
+            13
+          ]
+        },
+        "filter": {
+          "kind": "number",
+          "observedMin": 19,
+          "observedMax": 19,
+          "examples": [
+            19
+          ]
+        },
+        "outLevel": {
+          "kind": "number",
+          "observedMin": -0.4,
+          "observedMax": -0.4,
+          "examples": [
+            -0.4
+          ]
+        },
+        "mode": {
+          "kind": "string",
+          "examples": [
+            "lpf"
+          ]
+        },
+        "speed": {
+          "kind": "number",
+          "observedMin": 4.898999999999999,
+          "observedMax": 4.898999999999999,
+          "examples": [
+            4.898999999999999
+          ]
+        },
+        "release": {
+          "kind": "number",
+          "observedMin": 0.563,
+          "observedMax": 0.563,
+          "examples": [
+            0.563
+          ]
+        },
+        "polarity": {
+          "kind": "string",
+          "examples": [
+            "positive"
+          ]
+        },
+        "sensitivity": {
+          "kind": "number",
+          "observedMin": 28,
+          "observedMax": 28,
+          "examples": [
+            28
+          ]
+        }
+      }
+    },
+    {
+      "slug": "visualEq",
+      "seenInProjects": 1,
+      "trackTypes": [
+        "preset"
+      ],
+      "params": {
+        "filter0Active": {
+          "kind": "string",
+          "examples": [
+            "true"
+          ]
+        },
+        "filter1Freq": {
+          "kind": "number",
+          "observedMin": 528,
+          "observedMax": 528,
+          "examples": [
+            528
+          ]
+        },
+        "filter1Gain": {
+          "kind": "number",
+          "observedMin": 0,
+          "observedMax": 0,
+          "examples": [
+            0
+          ]
+        },
+        "filter0Bandwidth": {
+          "kind": "number",
+          "observedMin": 0.23,
+          "observedMax": 0.23,
+          "examples": [
+            0.23
+          ]
+        },
+        "filter0Type": {
+          "kind": "string",
+          "examples": [
+            "peaking"
+          ]
+        },
+        "filter2Bandwidth": {
+          "kind": "number",
+          "observedMin": 0.44,
+          "observedMax": 0.44,
+          "examples": [
+            0.44
+          ]
+        },
+        "filter2Freq": {
+          "kind": "number",
+          "observedMin": 4888,
+          "observedMax": 4888,
+          "examples": [
+            4888
+          ]
+        },
+        "filter2Gain": {
+          "kind": "number",
+          "observedMin": -2.3000000000000003,
+          "observedMax": -2.3000000000000003,
+          "examples": [
+            -2.3000000000000003
+          ]
+        },
+        "filter2Active": {
+          "kind": "string",
+          "examples": [
+            "true"
+          ]
+        },
+        "filter1Type": {
+          "kind": "string",
+          "examples": [
+            "peaking"
+          ]
+        },
+        "filter1Bandwidth": {
+          "kind": "number",
+          "observedMin": 0.88,
+          "observedMax": 0.88,
+          "examples": [
+            0.88
+          ]
+        },
+        "filter1Active": {
+          "kind": "string",
+          "examples": [
+            "true"
+          ]
+        },
+        "filter0Freq": {
+          "kind": "number",
+          "observedMin": 44,
+          "observedMax": 44,
+          "examples": [
+            44
+          ]
+        },
+        "filter0Gain": {
+          "kind": "number",
+          "observedMin": 2.3000000000000003,
+          "observedMax": 2.3000000000000003,
+          "examples": [
+            2.3000000000000003
+          ]
+        },
+        "filter2Type": {
+          "kind": "string",
+          "examples": [
+            "peaking"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "cleanLimiter",
+      "seenInProjects": 1,
+      "trackTypes": [
+        "preset"
+      ],
+      "params": {
+        "release": {
+          "kind": "string",
+          "examples": [
+            "slow"
+          ]
+        },
+        "truePeak": {
+          "kind": "boolean",
+          "examples": [
+            false
+          ]
+        },
+        "attack": {
+          "kind": "string",
+          "examples": [
+            "slow"
+          ]
+        },
+        "input": {
+          "kind": "number",
+          "observedMin": -3.6000000000000005,
+          "observedMax": -3.6000000000000005,
+          "examples": [
+            -3.6000000000000005
+          ]
+        },
+        "type": {
+          "kind": "string",
+          "examples": [
+            "lowfreqEmph"
+          ]
+        },
+        "threshold": {
+          "kind": "number",
+          "observedMin": -6.8999999999999995,
+          "observedMax": -6.8999999999999995,
+          "examples": [
+            -6.8999999999999995
+          ]
+        }
+      }
+    },
+    {
+      "slug": "gain",
+      "seenInProjects": 1,
+      "trackTypes": [
+        "preset"
+      ],
+      "params": {
+        "gain": {
+          "kind": "number",
+          "observedMin": 1.5,
+          "observedMax": 1.5,
+          "examples": [
+            1.5
+          ]
+        }
+      }
+    },
+    {
+      "slug": "guitarAmp",
+      "seenInProjects": 1,
+      "trackTypes": [
+        "preset"
+      ],
+      "params": {
+        "irType": {
+          "kind": "string",
+          "examples": [
+            "tweedCabShort"
+          ]
+        },
+        "bass": {
+          "kind": "number",
+          "observedMin": 3.6,
+          "observedMax": 3.6,
+          "examples": [
+            3.6
+          ]
+        },
+        "drive": {
+          "kind": "number",
+          "observedMin": 5.9,
+          "observedMax": 5.9,
+          "examples": [
+            5.9
+          ]
+        },
+        "master": {
+          "kind": "number",
+          "observedMin": 5,
+          "observedMax": 5,
+          "examples": [
+            5
+          ]
+        },
+        "mid": {
+          "kind": "number",
+          "observedMin": 4.9,
+          "observedMax": 4.9,
+          "examples": [
+            4.9
+          ]
+        },
+        "presence": {
+          "kind": "number",
+          "observedMin": 4.9,
+          "observedMax": 4.9,
+          "examples": [
+            4.9
+          ]
+        },
+        "treble": {
+          "kind": "number",
+          "observedMin": 9.5,
+          "observedMax": 9.5,
+          "examples": [
+            9.5
+          ]
+        }
+      }
+    },
+    {
+      "slug": "exciter",
+      "seenInProjects": 1,
+      "trackTypes": [
+        "preset"
+      ],
+      "params": {
+        "mix": {
+          "kind": "number",
+          "observedMin": -12,
+          "observedMax": -12,
+          "examples": [
+            -12
+          ]
+        },
+        "tune": {
+          "kind": "number",
+          "observedMin": 3066,
+          "observedMax": 3066,
+          "examples": [
+            3066
+          ]
+        },
+        "harmonics": {
+          "kind": "number",
+          "observedMin": 39.8,
+          "observedMax": 39.8,
+          "examples": [
+            39.8
+          ]
+        },
+        "threshold": {
+          "kind": "number",
+          "observedMin": -7.4,
+          "observedMax": -7.4,
+          "examples": [
+            -7.4
+          ]
+        }
+      }
+    },
+    {
+      "slug": "stereoSpreader",
+      "seenInProjects": 1,
+      "trackTypes": [
+        "preset"
+      ],
+      "params": {
+        "upperIntensity": {
+          "kind": "number",
+          "observedMin": 1,
+          "observedMax": 1,
+          "examples": [
+            1
+          ]
+        },
+        "upperFrequency": {
+          "kind": "number",
+          "observedMin": 45.81735305535547,
+          "observedMax": 45.81735305535547,
+          "examples": [
+            45.81735305535547
+          ]
+        },
+        "lowerIntensity": {
+          "kind": "number",
+          "observedMin": 0.71,
+          "observedMax": 0.71,
+          "examples": [
+            0.71
+          ]
+        }
+      }
+    },
+    {
+      "slug": "autoPan",
+      "seenInProjects": 1,
+      "trackTypes": [
+        "preset"
+      ],
+      "params": {
+        "rateBeats": {
+          "kind": "string",
+          "examples": [
+            "halfNote"
+          ]
+        },
+        "rateHz": {
+          "kind": "number",
+          "observedMin": 0.5,
+          "observedMax": 0.5,
+          "examples": [
+            0.5
+          ]
+        },
+        "rateUnitSelection": {
+          "kind": "string",
+          "examples": [
+            "rateBeats"
+          ]
+        },
+        "spread": {
+          "kind": "number",
+          "observedMin": 0.7,
+          "observedMax": 0.7,
+          "examples": [
+            0.7
+          ]
+        }
+      }
+    },
+    {
+      "slug": "masteringLimiter",
+      "seenInProjects": 1,
+      "trackTypes": [
+        "voice"
+      ],
+      "params": {
+        "attack": {
+          "kind": "number",
+          "observedMin": 0.001,
+          "observedMax": 0.001,
+          "examples": [
+            0.001
+          ]
+        },
+        "enhance": {
+          "kind": "number",
+          "observedMin": 5.64,
+          "observedMax": 5.64,
+          "examples": [
+            5.64
+          ]
+        },
+        "gain": {
+          "kind": "number",
+          "observedMin": 0,
+          "observedMax": 0,
+          "examples": [
+            0
+          ]
+        },
+        "masterLevel": {
+          "kind": "number",
+          "observedMin": 0,
+          "observedMax": 0,
+          "examples": [
+            0
+          ]
+        },
+        "release": {
+          "kind": "number",
+          "observedMin": 0.7967,
+          "observedMax": 0.7967,
+          "examples": [
+            0.7967
+          ]
+        },
+        "softKnee": {
+          "kind": "number",
+          "observedMin": -5,
+          "observedMax": -5,
+          "examples": [
+            -5
+          ]
+        }
+      }
+    },
+    {
+      "slug": "reverser",
+      "seenInProjects": 1,
+      "trackTypes": [
+        "voice"
+      ],
+      "params": {
+        "intervalTimeBeats": {
+          "kind": "string",
+          "examples": [
+            "eighthNoteTriplet"
+          ]
+        },
+        "intervalUnitSelection": {
+          "kind": "string",
+          "examples": [
+            "intervalTimeBeats"
+          ]
+        },
+        "dryWetMix": {
+          "kind": "number",
+          "observedMin": 0.22,
+          "observedMax": 0.22,
+          "examples": [
+            0.22
+          ]
+        },
+        "intervalTimeSec": {
+          "kind": "number",
+          "observedMin": 0.4499528793847513,
+          "observedMax": 0.4499528793847513,
+          "examples": [
+            0.4499528793847513
+          ]
+        }
+      }
+    },
+    {
+      "slug": "cabinet",
+      "seenInProjects": 1,
+      "trackTypes": [
+        "voice"
+      ],
+      "params": {
+        "irType": {
+          "kind": "string",
+          "examples": [
+            "twinCab"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "rossCompr",
+      "seenInProjects": 1,
+      "trackTypes": [
+        "voice"
+      ],
+      "params": {
+        "level": {
+          "kind": "number",
+          "observedMin": -14.64,
+          "observedMax": -14.64,
+          "examples": [
+            -14.64
+          ]
+        },
+        "sustain": {
+          "kind": "number",
+          "observedMin": 23.759999999999998,
+          "observedMax": 23.759999999999998,
+          "examples": [
+            23.759999999999998
+          ]
+        }
+      }
+    },
+    {
+      "slug": "ehSmallStone",
+      "seenInProjects": 1,
+      "trackTypes": [
+        "voice"
+      ],
+      "params": {
+        "resonance": {
+          "kind": "string",
+          "examples": [
+            "low"
+          ]
+        },
+        "speed": {
+          "kind": "number",
+          "observedMin": 3.962,
+          "observedMax": 3.962,
+          "examples": [
+            3.962
+          ]
+        }
+      }
+    }
+  ],
+  "auxPresets": {
+    "sharedReverb": 50
+  },
+  "masteringPresets": {},
+  "trackTypes": {
+    "voice": 190,
+    "drum-machine": 9,
+    "synth-pads": 1,
+    "synth-bass": 2,
+    "synth-keys": 1,
+    "piano": 6,
+    "synth-leads": 1,
+    "guitars": 1,
+    "guitar": 4
+  }
+}

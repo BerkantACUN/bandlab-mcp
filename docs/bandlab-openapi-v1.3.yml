@@ -1,0 +1,6753 @@
+openapi: 3.0.0
+info:
+  title: BandLab API
+  description: ''
+  version: '1.3'
+  
+servers:
+  - url: 'https://test.bandlab.com/api/v1.3'
+    description: 'Test environment'
+  - url: 'https://bandlab.com/api/v1.3'
+    description: 'Production environment'
+
+paths:
+  '/validation/{entityType}':
+    get:
+      tags:
+        - validation
+      summary: Validates the user fields
+      description: Validates the user fields
+      operationId: ValidatesTheUserFields
+      parameters:
+        - name: entityType
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/schemas/EntityType'
+        - name: name
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: username
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/ValidationResult'
+      security:
+        - Authorization: []
+  /me:
+    get:
+      tags:
+        - profile
+      summary: Returns a profile of current user
+      description: Returns a profile of current user
+      operationId: ReturnsAProfileOfCurrentUser
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Profile'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - Authorization: []
+    patch:
+      tags:
+        - profile
+      summary: Updates a profile of current user
+      description: Updates a profile of current user
+      operationId: UpdatesAProfileOfCurrentUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Profile'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Profile'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+      security:
+        - Authorization: []
+  '/users/{userId}':
+    get:
+      tags:
+        - users
+      summary: Returns a single user
+      description: Returns a single user
+      operationId: ReturnsASingleUser
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/User'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/users/{userId}/followers':
+    get:
+      tags:
+        - users
+      summary: Returns user followers
+      description: Returns user followers
+      operationId: ReturnsUserFollowers
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/UserList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+    post:
+      tags:
+        - users
+      summary: Adds current user to the list of followers
+      description: Adds current user to the list of followers
+      operationId: AddsCurrentUserToTheListOfFollowers
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+    delete:
+      tags:
+        - users
+      summary: Removes current user from the list of followers
+      description: Removes current user from the list of followers
+      operationId: RemovesCurrentUserFromTheListOfFollowers
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/users/{userId}/following':
+    get:
+      tags:
+        - users
+      summary: Returns user following
+      description: Returns user following
+      operationId: ReturnsUserFollowing
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/UserList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  /bands:
+    post:
+      tags:
+        - bands
+      summary: Create a new band
+      description: Create a new band
+      operationId: CreateANewBand
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Band'
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Band'
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/bands/{bandId}':
+    get:
+      tags:
+        - bands
+      summary: Returns a single band
+      description: Returns a single band
+      operationId: ReturnsASingleBand
+      parameters:
+        - name: bandId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Band'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+    delete:
+      tags:
+        - bands
+      summary: Deletes a band
+      description: Deletes a band
+      operationId: DeletesABand
+      parameters:
+        - name: bandId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+      security:
+        - Authorization: []
+    patch:
+      tags:
+        - bands
+      summary: Updates a band
+      description: Updates a band
+      operationId: UpdatesABand
+      parameters:
+        - name: bandId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Band'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Band'
+      security:
+        - Authorization: []
+  '/users/{userId}/bands':
+    get:
+      tags:
+        - bands
+      summary: Returns a list of bands
+      description: Returns a list of bands
+      operationId: ReturnsAListOfBands
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Band'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/bands/{bandId}/members':
+    get:
+      tags:
+        - bands
+      summary: Returns members of a band
+      description: Returns members of a band
+      operationId: ReturnsMembersOfABand
+      parameters:
+        - name: bandId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/GroupMemberList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/bands/{bandId}/members/{userId}':
+    get:
+      tags:
+        - bands
+      summary: Returns a single member
+      description: Returns a single member
+      operationId: ReturnsASingleMember
+      parameters:
+        - name: bandId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/GroupMember'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+    delete:
+      tags:
+        - bands
+      summary: Removes a member
+      description: Removes a member
+      operationId: RemovesAMember
+      parameters:
+        - name: bandId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+    patch:
+      tags:
+        - bands
+      summary: Updates a member
+      description: Updates a member
+      operationId: UpdatesAMember
+      parameters:
+        - name: bandId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupMember'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/GroupMember'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  /communities:
+    post:
+      tags:
+        - communities
+      summary: Create a new community
+      description: Create a new community
+      operationId: CreateANewCommunity
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Community'
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Community'
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/communities/{communityId}':
+    get:
+      tags:
+        - communities
+      summary: Returns a single community
+      description: Returns a single community
+      operationId: ReturnsASingleCommunity
+      parameters:
+        - name: communityId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Community'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+    delete:
+      tags:
+        - communities
+      summary: Deletes a community
+      description: Deletes a community
+      operationId: DeletesACommunity
+      parameters:
+        - name: communityId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+      security:
+        - Authorization: []
+    patch:
+      tags:
+        - communities
+      summary: Updates a community
+      description: Updates a community
+      operationId: UpdatesACommunity
+      parameters:
+        - name: communityId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Community'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Community'
+      security:
+        - Authorization: []
+  '/users/{userId}/communities':
+    get:
+      tags:
+        - communities
+      summary: Returns a list of bands
+      description: Returns a list of bands
+      operationId: ReturnsAListOfBands1
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/CommunityList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/communities/{communityId}/members':
+    get:
+      tags:
+        - communities
+      summary: Returns members of a band
+      description: Returns members of a band
+      operationId: ReturnsMembersOfABand1
+      parameters:
+        - name: communityId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/GroupMemberList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/communities/{communityId}/members/{userId}':
+    get:
+      tags:
+        - communities
+      summary: Returns a single member
+      description: Returns a single member
+      operationId: ReturnsASingleMember1
+      parameters:
+        - name: communityId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/GroupMember'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+    delete:
+      tags:
+        - communities
+      summary: Removes a member
+      description: Removes a member
+      operationId: RemovesAMember1
+      parameters:
+        - name: communityId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+    patch:
+      tags:
+        - communities
+      summary: Updates a member
+      description: Updates a member
+      operationId: UpdatesAMember1
+      parameters:
+        - name: communityId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupMember'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/GroupMember'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/songs/{songId}':
+    get:
+      tags:
+        - songs
+      summary: Returns a single song
+      description: Returns a single song
+      operationId: ReturnsASingleSong
+      parameters:
+        - name: songId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Song'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+    delete:
+      tags:
+        - songs
+      summary: Deletes a song
+      description: Deletes a song
+      operationId: DeletesASong
+      parameters:
+        - name: songId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+      security:
+        - Authorization: []
+    patch:
+      tags:
+        - songs
+      summary: Updates a song
+      description: Updates a song
+      operationId: UpdatesASong
+      parameters:
+        - name: songId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Song'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Song'
+      security:
+        - Authorization: []
+  '/users/{userId}/songs':
+    get:
+      tags:
+        - songs
+      summary: Returns a list of songs
+      description: Returns a list of songs
+      operationId: ReturnsAListOfSongs
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/SongList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/bands/{bandId}/songs':
+    get:
+      tags:
+        - songs
+      summary: Returns a list of songs
+      description: Returns a list of songs
+      operationId: ReturnsAListOfSongs1
+      parameters:
+        - name: bandId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/SongList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/songs/{songId}/collaborators':
+    get:
+      tags:
+        - songs
+      summary: Returns members of a band
+      description: Returns members of a band
+      operationId: ReturnsMembersOfABand2
+      parameters:
+        - name: communityId
+          in: query
+          description: ''
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+            format: uuid
+        - name: songId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/CollaboratorSummaryList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/songs/{songId}/collaborators/{userId}':
+    delete:
+      tags:
+        - songs
+      summary: Removes a collaborator
+      description: Removes a collaborator
+      operationId: RemovesACollaborator
+      parameters:
+        - name: songId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  /collections:
+    post:
+      tags:
+        - collections
+      summary: Create a new collection
+      description: Create a new collection
+      operationId: CreateANewCollection
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Collection'
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Collection'
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/collections/{collectionId}':
+    get:
+      tags:
+        - collections
+      summary: Returns a single collection
+      description: Returns a single collection
+      operationId: ReturnsASingleCollection
+      parameters:
+        - name: collectionId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Collection'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+    delete:
+      tags:
+        - collections
+      summary: Deletes a collection
+      description: Deletes a collection
+      operationId: DeletesACollection
+      parameters:
+        - name: collectionId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+      security:
+        - Authorization: []
+    patch:
+      tags:
+        - collections
+      summary: Updates a collection
+      description: Updates a collection
+      operationId: UpdatesACollection
+      parameters:
+        - name: collectionId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Collection'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Collection'
+      security:
+        - Authorization: []
+  '/users/{userId}/collections':
+    get:
+      tags:
+        - collections
+      summary: Returns a list of collections
+      description: Returns a list of collections
+      operationId: ReturnsAListOfCollections
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/CollectionList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/collections/{collectionId}/posts/{postId}':
+    get:
+      tags:
+        - collections
+      summary: Returns a single post
+      description: Returns a single post
+      operationId: ReturnsASinglePost
+      parameters:
+        - name: collectionId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: postId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Post'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+    post:
+      tags:
+        - collections
+      summary: Add post to a collection
+      description: Add post to a collection
+      operationId: AddPostToACollection
+      parameters:
+        - name: collectionId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: postId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Post'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+    delete:
+      tags:
+        - collections
+      summary: Removes a post
+      description: Removes a post
+      operationId: RemovesAPost
+      parameters:
+        - name: collectionId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: postId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+    patch:
+      tags:
+        - collections
+      summary: Updates position of post
+      description: Updates position of post
+      operationId: UpdatesPositionOfPost
+      parameters:
+        - name: collectionId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: postId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostPosition'
+        required: true
+      responses:
+        '204':
+          description: Successful operation
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  /posts:
+    get:
+      tags:
+        - posts
+      summary: Get a list of posts
+      description: Get a list of posts
+      operationId: GetAListOfPosts
+      parameters:
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: tag
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: spotlights
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: genres
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: types
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: forkable
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: boolean
+        - name: sort
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            $ref: '#/components/schemas/Sort'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/PostList'
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/posts/{postId}':
+    get:
+      tags:
+        - posts
+      summary: Returns a single post
+      description: Returns a single post
+      operationId: ReturnsASinglePost1
+      parameters:
+        - name: postId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Invite'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+    delete:
+      tags:
+        - posts
+      summary: Deletes a post
+      description: Deletes a post
+      operationId: DeletesAPost
+      parameters:
+        - name: postId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+      security:
+        - Authorization: []
+    patch:
+      tags:
+        - posts
+      summary: Updates a post
+      description: Updates a post
+      operationId: UpdatesAPost
+      parameters:
+        - name: postId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+      security:
+        - Authorization: []
+  '/users/{userId}/posts':
+    get:
+      tags:
+        - posts
+      summary: Returns a list of posts
+      description: Returns a list of posts
+      operationId: ReturnsAListOfPosts
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/PostList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/users/{userId}/following/posts':
+    get:
+      tags:
+        - posts
+      summary: Returns a list of posts1
+      description: Returns a list of posts
+      operationId: ReturnsAListOfPosts1
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/PostList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/bands/{bandId}/posts':
+    get:
+      tags:
+        - posts
+      summary: Returns a list of posts
+      description: Returns a list of posts
+      operationId: ReturnsAListOfPosts2
+      parameters:
+        - name: bandId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/PostList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/song/{songId}/posts':
+    get:
+      tags:
+        - posts
+      summary: Returns a list of posts
+      description: Returns a list of posts
+      operationId: ReturnsAListOfPosts3
+      parameters:
+        - name: songId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/PostList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/community/{communityId}/posts':
+    get:
+      tags:
+        - posts
+      summary: Returns a list of posts
+      description: Returns a list of posts
+      operationId: ReturnsAListOfPosts4
+      parameters:
+        - name: communityId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/PostList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+    post:
+      tags:
+        - posts
+      summary: Create a text post
+      description: Create a text post
+      operationId: CreateATextPost
+      parameters:
+        - name: communityId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Post'
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/videos/{videoId}/posts':
+    post:
+      tags:
+        - posts
+      summary: Create a video post
+      description: Create a video post
+      operationId: CreateAVideoPost
+      parameters:
+        - name: videoId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Post'
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/images/{imageId}/posts':
+    post:
+      tags:
+        - posts
+      summary: Create a image post
+      description: Create a image post
+      operationId: CreateAImagePost
+      parameters:
+        - name: imageId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Post'
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  /revisions:
+    post:
+      tags:
+        - revisions
+      summary: Create a new revision
+      description: Create a new revision
+      operationId: CreateANewRevision
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Revision'
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Revision'
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/revisions/{revisionId}':
+    get:
+      tags:
+        - revisions
+      summary: Returns a single revision
+      description: Returns a single revision
+      operationId: ReturnsASingleRevision
+      parameters:
+        - name: revisionId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Revision'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+    patch:
+      tags:
+        - revisions
+      summary: Updates a revision
+      description: Updates a revision
+      operationId: UpdatesARevision
+      parameters:
+        - name: revisionId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Revision'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Revision'
+      security:
+        - Authorization: []
+  '/songs/{songId}/revisions':
+    get:
+      tags:
+        - revisions
+      summary: Returns a list of revisions
+      description: Returns a list of revisions
+      operationId: ReturnsAListOfRevisions
+      parameters:
+        - name: songId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/RevisionList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/songs/{songId}/revisions/{revisonId}/forks':
+    post:
+      tags:
+        - forks
+      summary: Create a fork
+      description: Create a fork
+      operationId: CreateAFork
+      parameters:
+        - name: songId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: revisonId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Song'
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Song'
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/posts/{postId}/comments':
+    get:
+      tags:
+        - comments
+      summary: Returns list of comments
+      description: Returns list of comments
+      operationId: ReturnsListOfComments
+      parameters:
+        - name: postId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/CommentList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+    post:
+      tags:
+        - comments
+      summary: Creates a comment
+      description: Creates a comment
+      operationId: CreatesAComment
+      parameters:
+        - name: postId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Comment'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+  '/posts/{postId}/comments/{commentId}':
+    delete:
+      tags:
+        - comments
+      summary: Deletes a comment
+      description: Deletes a comment
+      operationId: DeletesAComment
+      parameters:
+        - name: postId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: commentId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Successful operation
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  '/collections/{collectionId}/likes':
+    get:
+      tags:
+        - likes
+      summary: Returns list of users
+      description: Returns list of users
+      operationId: ReturnsListOfUsers
+      parameters:
+        - name: collectionId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/UserSummaryList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+    post:
+      tags:
+        - likes
+      summary: Add a like
+      description: Add a like
+      operationId: AddALike
+      parameters:
+        - name: collectionId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+    delete:
+      tags:
+        - likes
+      summary: Removes a like
+      description: Removes a like
+      operationId: RemovesALike
+      parameters:
+        - name: collectionId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  '/posts/{postId}/likes':
+    get:
+      tags:
+        - likes
+      summary: Returns list of users
+      description: Returns list of users
+      operationId: ReturnsListOfUsers1
+      parameters:
+        - name: postId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/UserSummaryList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+    post:
+      tags:
+        - likes
+      summary: Add a like
+      description: Add a like
+      operationId: AddALike1
+      parameters:
+        - name: postId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+    delete:
+      tags:
+        - likes
+      summary: Removes a like
+      description: Removes a like
+      operationId: RemovesALike1
+      parameters:
+        - name: postId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  '/revisions/{revisionId}/plays':
+    post:
+      tags:
+        - plays
+      summary: Add a play
+      description: Add a play
+      operationId: AddAPlay
+      parameters:
+        - name: revisionId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  '/videos/{videoId}/views':
+    post:
+      tags:
+        - views
+      summary: Add a view
+      description: Add a view
+      operationId: AddAView
+      parameters:
+        - name: videoId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '202':
+          description: Successful operation
+      security:
+        - Authorization: []
+
+  /invites:
+    post:
+      tags:
+        - invites
+      summary: Send an external invite
+      description: Send an external invite
+      operationId: SendAnExternalInvite
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InviteBatchRequest'
+        required: true
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  '/invites/{inviteId}':
+    get:
+      tags:
+        - invites
+      summary: Returns a single invite
+      description: Returns a single invite
+      operationId: ReturnsASingleInvite
+      parameters:
+        - name: inviteId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Invite'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+    put:
+      tags:
+        - invites
+      summary: Accept an invite
+      description: Accept an invite
+      operationId: AcceptAnInvite
+      parameters:
+        - name: inviteId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+      security:
+        - Authorization: []
+
+    delete:
+      tags:
+        - invites
+      summary: Deletes an invite
+      description: Deletes an invite
+      operationId: DeletesAnInvite
+      parameters:
+        - name: inviteId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+      security:
+        - Authorization: []
+
+  '/users/{userId}/invites':
+    get:
+      tags:
+        - invites
+      summary: Returns a list of invites
+      description: Returns a list of invites
+      operationId: ReturnsAListOfInvites
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/InviteList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+    post:
+      tags:
+        - invites
+      summary: Send invites
+      description: Send invites
+      operationId: SendInvites
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InviteBatchRequest'
+        required: true
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  '/bands/{bandId}/invites':
+    get:
+      tags:
+        - invites
+      summary: Returns a list of invites
+      description: Returns a list of invites
+      operationId: ReturnsAListOfInvites1
+      parameters:
+        - name: bandId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/InviteList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+    post:
+      tags:
+        - invites
+      summary: Send invites1
+      description: Send invites
+      operationId: SendInvites1
+      parameters:
+        - name: bandId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InviteBatchRequest'
+        required: true
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  '/song/{songId}/invites':
+    get:
+      tags:
+        - invites
+      summary: Returns a list of invites
+      description: Returns a list of invites
+      operationId: ReturnsAListOfInvites2
+      parameters:
+        - name: songId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/InviteList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+    post:
+      tags:
+        - invites
+      summary: Send invites2
+      description: Send invites
+      operationId: SendInvites2
+      parameters:
+        - name: songId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InviteBatchRequest'
+        required: true
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  '/community/{communityId}/invites':
+    get:
+      tags:
+        - invites
+      summary: Returns a list of invites
+      description: Returns a list of invites
+      operationId: ReturnsAListOfInvites3
+      parameters:
+        - name: communityId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/InviteList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+    post:
+      tags:
+        - invites
+      summary: Send invites3
+      description: Send invites
+      operationId: SendInvites3
+      parameters:
+        - name: communityId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InviteBatchRequest'
+        required: true
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  /reports:
+    post:
+      tags:
+        - reports
+      summary: Send a new report
+      description: Send a new report
+      operationId: SendANewReport
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Report'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  /feedback:
+    post:
+      tags:
+        - reports
+      summary: Send a new feedback
+      description: Send a new feedback
+      operationId: SendANewFeedback
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Feedback'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  '/versions/{clientId}':
+    get:
+      tags:
+        - clients
+      summary: Returns version info of a client
+      description: Returns version info of a client
+      operationId: ReturnsVersionInfoOfAClient
+      parameters:
+        - name: clientId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/ClientVersion'
+      security:
+        - Authorization: []
+
+  '/versions/{clientId}/{version}/valid':
+    get:
+      tags:
+        - clients
+      summary: Validates version of a client
+      description: Validates version of a client
+      operationId: ValidatesVersionOfAClient
+      parameters:
+        - name: clientId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: clientVersion
+          in: query
+          description: ''
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: version
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/ValueResponse'
+      security:
+        - Authorization: []
+
+  /labels:
+    get:
+      tags:
+        - labels
+      summary: Returns all labels
+      description: Returns all labels
+      operationId: ReturnsAllLabels
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LabelArray'
+                description: Successful operation
+      security:
+        - Authorization: []
+
+  /genres:
+    get:
+      tags:
+        - labels
+      summary: Returns all genres
+      description: Returns all genres
+      operationId: ReturnsAllGenres
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Genre'
+                description: Successful operation
+      security:
+        - Authorization: []
+
+  /skills:
+    get:
+      tags:
+        - labels
+      summary: Returns all skills
+      description: Returns all skills
+      operationId: ReturnsAllSkills
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Skill'
+                description: Successful operation
+      security:
+        - Authorization: []
+
+  /badges:
+    get:
+      tags:
+        - labels
+      summary: Returns all badges
+      description: Returns all badges
+      operationId: ReturnsAllBadges
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Badge'
+                description: Successful operation
+      security:
+        - Authorization: []
+
+  '/users/{userId}/notifications':
+    get:
+      tags:
+        - notifications
+      summary: Returns a list of notifications
+      description: Returns a list of notifications
+      operationId: ReturnsAListOfNotifications
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/NotificationList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+    patch:
+      tags:
+        - notifications
+      summary: Updates notifications
+      description: Updates notifications
+      operationId: UpdatesNotifications
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificationPatch'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  '/users/{userId}/notifications/{notificationId}':
+    patch:
+      tags:
+        - notifications
+      summary: Updates a notification
+      description: Updates a notification
+      operationId: UpdatesANotification
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: notificationId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificationPatch'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  '/users/{userId}/notifications/following':
+    get:
+      tags:
+        - notifications
+      summary: Returns a list of notifications1
+      description: Returns a list of notifications
+      operationId: ReturnsAListOfNotifications1
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/NotificationList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  '/users/{userId}/notifications/count':
+    get:
+      tags:
+        - notifications
+      summary: Returns number of all notifications
+      description: Returns number of all notifications
+      operationId: ReturnsNumberOfAllNotifications
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/ReturnsNumberOfAllNotificationsresponse'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  /push/registrations:
+    post:
+      tags:
+        - push-registrations
+      summary: Registers a device for push notifications
+      description: Registers a device for push notifications
+      operationId: RegistersADeviceForPushNotifications
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+        required: true
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+    delete:
+      tags:
+        - push-registrations
+      summary: Unregisters a device
+      description: Unregisters a device
+      operationId: UnregistersADevice
+      parameters:
+        - name: pnsId
+          in: query
+          description: ''
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  '/users/{userId}/recommendations/users':
+    get:
+      tags:
+        - recommendations
+      summary: Returns a recommended users
+      description: Returns a recommended users
+      operationId: ReturnsARecommendedUsers
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/UserSummaryList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  /search:
+    get:
+      tags:
+        - search
+      summary: Search global
+      description: Search global
+      operationId: SearchGlobal
+      parameters:
+        - name: query
+          in: query
+          description: ''
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/GlobalSearchList'
+      security:
+        - Authorization: []
+
+  /search/users:
+    get:
+      tags:
+        - search
+      summary: Search users
+      description: Search users
+      operationId: SearchUsers
+      parameters:
+        - name: query
+          in: query
+          description: ''
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/UserList'
+      security:
+        - Authorization: []
+
+  /search/bands:
+    get:
+      tags:
+        - search
+      summary: Search users1
+      description: Search users
+      operationId: SearchUsers1
+      parameters:
+        - name: query
+          in: query
+          description: ''
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/BandList'
+      security:
+        - Authorization: []
+
+  /search/songs:
+    get:
+      tags:
+        - search
+      summary: Search users2
+      description: Search users
+      operationId: SearchUsers2
+      parameters:
+        - name: query
+          in: query
+          description: ''
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/SongList'
+      security:
+        - Authorization: []
+
+  /search/collections:
+    get:
+      tags:
+        - search
+      summary: Search users3
+      description: Search users
+      operationId: SearchUsers3
+      parameters:
+        - name: query
+          in: query
+          description: ''
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/CollectionList'
+      security:
+        - Authorization: []
+
+  /authorizations:
+    post:
+      tags:
+        - authorizations
+      summary: Generates a session key
+      description: Generates a session key
+      operationId: GeneratesASessionKey
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizationRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/AuthorizationResult'
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  '/users/{userId}/keys':
+    post:
+      tags:
+        - authorizations
+      summary: Generates one-time access key
+      description: Generates one-time access key
+      operationId: Generates oneTime access key
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/GeneratesoneTimeaccesskeyresponse'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  /logins:
+    get:
+      tags:
+        - logins
+      summary: Returns external logins
+      description: Returns external logins
+      operationId: ReturnsExternalLogins
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Login'
+                description: Successful operation
+      security:
+        - Authorization: []
+
+    post:
+      tags:
+        - logins
+      summary: Add external login
+      description: Add external login
+      operationId: AddExternalLogin
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Login'
+      security:
+        - Authorization: []
+
+  '/logins/{providerType}':
+    put:
+      tags:
+        - logins
+      summary: Updates an external login
+      description: Updates an external login
+      operationId: UpdatesAnExternalLogin
+      parameters:
+        - name: providerType
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/schemas/ProviderType139'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/Login'
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+    delete:
+      tags:
+        - logins
+      summary: Removes an external login
+      description: Removes an external login
+      operationId: RemovesAnExternalLogin
+      parameters:
+        - name: providerType
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/schemas/ProviderType139'
+      responses:
+        '204':
+          description: Successful operation
+      security:
+        - Authorization: []
+
+  /emails/confirmations:
+    put:
+      tags:
+        - emails
+      summary: Confirms an email
+      description: Confirms an email
+      operationId: ConfirmsAnEmail
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailConfirmation'
+        required: true
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+    post:
+      tags:
+        - emails
+      summary: Resends the email confirmation
+      description: Resends the email confirmation
+      operationId: ResendsTheEmailConfirmation
+      parameters: []
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  /passwords:
+    put:
+      tags:
+        - passwords
+      summary: Changes password
+      description: Changes password
+      operationId: ChangesPassword
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordChangeRequest'
+        required: true
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+    post:
+      tags:
+        - passwords
+      summary: Resets password
+      description: Resets password
+      operationId: ResetsPassword
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordResetRequest'
+        required: true
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+    delete:
+      tags:
+        - passwords
+      summary: Sends restore password email
+      description: Sends restore password email
+      operationId: SendsRestorePasswordEmail
+      parameters:
+        - name: email
+          in: query
+          description: ''
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  /settings/notifications/email:
+    get:
+      tags:
+        - settings
+      summary: Returns email notifications settings
+      description: Returns email notifications settings
+      operationId: ReturnsEmailNotificationsSettings
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/SettingsEmail'
+      security:
+        - Authorization: []
+
+    patch:
+      tags:
+        - settings
+      summary: Updates email notifications settings
+      description: Updates email notifications settings
+      operationId: UpdatesEmailNotificationsSettings
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SettingsEmail'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/SettingsEmail'
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  /settings/notifications/push:
+    get:
+      tags:
+        - settings
+      summary: Returns push notifications settings
+      description: Returns push notifications settings
+      operationId: ReturnsPushNotificationsSettings
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/SettingsEmail'
+      security:
+        - Authorization: []
+
+    patch:
+      tags:
+        - settings
+      summary: Updates push notifications settings
+      description: Updates push notifications settings
+      operationId: UpdatesPushNotificationsSettings
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SettingsPush'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/SettingsPush'
+        '400':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  '/users/{userId}/contacts/users':
+    get:
+      tags:
+        - contacts
+      summary: Returns list of users
+      description: Returns list of users
+      operationId: ReturnsListOfUsers2
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/UserSummaryList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  '/users/{userId}/contacts/bands':
+    get:
+      tags:
+        - contacts
+      summary: Returns list of bands
+      description: Returns list of bands
+      operationId: ReturnsListOfBands
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/BandSummaryList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  '/users/{userId}/blocks/users':
+    get:
+      tags:
+        - blocks
+      summary: Returns list of users
+      description: Returns list of users
+      operationId: ReturnsListOfUsers3
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Successful operation
+                $ref: '#/components/schemas/UserSummaryList'
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+  '/users/{userId}/blocks/users/{blockedUserId}':
+    post:
+      tags:
+        - blocks
+      summary: Blocks a user
+      description: Blocks a user
+      operationId: BlocksAUser
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: blockedUserId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+    delete:
+      tags:
+        - blocks
+      summary: Unblocks a user
+      description: Unblocks a user
+      operationId: UnblocksAUser
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+        - name: blockedUserId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+        '404':
+          description: Unsuccessful operation
+      security:
+        - Authorization: []
+
+components:
+  schemas:
+    EntityType:
+      title: EntityType
+      enum:
+        - user
+        - band
+        - song
+      type: string
+      example: user
+      x-enum-elements:
+        - name: user
+          description: ''
+        - name: band
+          description: ''
+        - name: song
+          description: ''
+    Gender:
+      title: Gender
+      enum:
+        - Male
+        - Female
+        - Other
+      type: string
+      example: Male
+      x-enum-elements:
+        - name: Male
+          description: ''
+        - name: Female
+          description: ''
+        - name: Other
+          description: ''
+    ClientId:
+      title: ClientId
+      enum:
+        - Angular
+        - iOS
+        - Android
+        - Assistant
+      type: string
+      example: Angular
+      x-enum-elements:
+        - name: Angular
+          description: ''
+        - name: iOS
+          description: ''
+        - name: Android
+          description: ''
+        - name: Assistant
+          description: ''
+    AuthorType:
+      title: AuthorType
+      enum:
+        - User
+        - Band
+      type: string
+      example: User
+      x-enum-elements:
+        - name: User
+          description: ''
+        - name: Band
+          description: ''
+    SampleStatus:
+      title: SampleStatus
+      enum:
+        - Empty
+        - NotReady
+        - Processing
+        - Ready
+        - Corrupted
+      type: string
+      example: Empty
+      x-enum-elements:
+        - name: Empty
+          description: ''
+        - name: NotReady
+          description: ''
+        - name: Processing
+          description: ''
+        - name: Ready
+          description: ''
+        - name: Corrupted
+          description: ''
+    Color:
+      title: Color
+      enum:
+        - Red
+        - Blue
+        - Violet
+        - Pink
+        - Green
+        - Yellow
+      type: string
+      example: Red
+      x-enum-elements:
+        - name: Red
+          description: ''
+        - name: Blue
+          description: ''
+        - name: Violet
+          description: ''
+        - name: Pink
+          description: ''
+        - name: Green
+          description: ''
+        - name: Yellow
+          description: ''
+    GroupRole:
+      title: GroupRole
+      enum:
+        - None
+        - Member
+        - Admin
+        - Owner
+      type: string
+      example: None
+      x-enum-elements:
+        - name: None
+          description: ''
+        - name: Member
+          description: ''
+        - name: Admin
+          description: ''
+        - name: Owner
+          description: ''
+    PostType:
+      title: PostType
+      enum:
+        - Revision
+        - Image
+        - Video
+        - Text
+      type: string
+      example: Revision
+      x-enum-elements:
+        - name: Revision
+          description: ''
+        - name: Image
+          description: ''
+        - name: Video
+          description: ''
+        - name: Text
+          description: ''
+    CommunityType:
+      title: CommunityType
+      enum:
+        - Public
+        - Private
+        - Closed
+      type: string
+      example: Public
+      x-enum-elements:
+        - name: Public
+          description: ''
+        - name: Private
+          description: ''
+        - name: Closed
+          description: ''
+    CollectionType:
+      title: CollectionType
+      enum:
+        - Playlist
+        - Album
+      type: string
+      example: Playlist
+      x-enum-elements:
+        - name: Playlist
+          description: ''
+        - name: Album
+          description: ''
+    InviteType:
+      title: InviteType
+      enum:
+        - RequestToBand
+        - RequestToSong
+        - RequestToCommunity
+        - InviteToBand
+        - InviteToSong
+        - InviteToCommunity
+        - ExternalInviteToBand
+        - ExternalInviteToSong
+        - ExternalInviteToBandLab
+      type: string
+      example: RequestToBand
+      x-enum-elements:
+        - name: RequestToBand
+          description: ''
+        - name: RequestToSong
+          description: ''
+        - name: RequestToCommunity
+          description: ''
+        - name: InviteToBand
+          description: ''
+        - name: InviteToSong
+          description: ''
+        - name: InviteToCommunity
+          description: ''
+        - name: ExternalInviteToBand
+          description: ''
+        - name: ExternalInviteToSong
+          description: ''
+        - name: ExternalInviteToBandLab
+          description: ''
+    ProviderType:
+      title: ProviderType
+      enum:
+        - Password
+        - Key
+        - Token
+        - Google
+        - Facebook
+        - Twitter
+        - Soundcloud
+      type: string
+      example: Password
+      x-enum-elements:
+        - name: Password
+          description: ''
+        - name: Key
+          description: ''
+        - name: Token
+          description: ''
+        - name: Google
+          description: ''
+        - name: Facebook
+          description: ''
+        - name: Twitter
+          description: ''
+        - name: Soundcloud
+          description: ''
+    ExternalProviderType:
+      title: ExternalProviderType
+      enum:
+        - Google
+        - Facebook
+      type: string
+      example: Google
+      x-enum-elements:
+        - name: Google
+          description: ''
+        - name: Facebook
+          description: ''
+    AuthorizationRequest:
+      title: AuthorizationRequest
+      type: object
+      properties:
+        provider:
+          $ref: '#/components/schemas/Provider'
+        name:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        accessToken:
+          type: string
+        referral:
+          type: string
+        login:
+          type: string
+        refreshToken:
+          type: string
+        key:
+          type: string
+        register:
+          type: boolean
+        rememberMe:
+          type: boolean
+    Provider:
+      title: Provider
+      enum:
+        - Password
+        - Key
+        - Token
+        - Google
+        - Facebook
+        - Twitter
+        - Soundcloud
+      type: string
+      example: Password
+      x-enum-elements:
+        - name: Password
+          description: ''
+        - name: Key
+          description: ''
+        - name: Token
+          description: ''
+        - name: Google
+          description: ''
+        - name: Facebook
+          description: ''
+        - name: Twitter
+          description: ''
+        - name: Soundcloud
+          description: ''
+    AuthorizationResult:
+      title: AuthorizationResult
+      type: object
+      properties:
+        sessionKey:
+          type: string
+        refreshToken:
+          type: string
+        expireDate:
+          type: string
+          format: date-time
+        provider:
+          $ref: '#/components/schemas/Provider'
+        wasRegistered:
+          type: boolean
+    PasswordChangeRequest:
+      title: PasswordChangeRequest
+      type: object
+      properties:
+        newPassword:
+          type: string
+        oldPassword:
+          type: string
+    PasswordResetRequest:
+      title: PasswordResetRequest
+      type: object
+      properties:
+        newPassword:
+          type: string
+        code:
+          type: string
+        userId:
+          type: string
+          format: uuid
+    SettingsEmail:
+      title: SettingsEmail
+      type: object
+      properties:
+        invitationToBand:
+          type: boolean
+        invitationToSong:
+          type: boolean
+        joinToBandRequest:
+          type: boolean
+        requestToJoinApproved:
+          type: boolean
+        newRevision:
+          type: boolean
+        newSongInBand:
+          type: boolean
+        newBandMember:
+          type: boolean
+        newSongCollaborator:
+          type: boolean
+    SettingsPush:
+      title: SettingsPush
+      type: object
+      properties:
+        invitationToBand:
+          type: boolean
+        invitationToSong:
+          type: boolean
+        joinToBandRequest:
+          type: boolean
+        requestToJoinApproved:
+          type: boolean
+        newRevision:
+          type: boolean
+        newSongInBand:
+          type: boolean
+        newBandMember:
+          type: boolean
+        newSongCollaborator:
+          type: boolean
+    Login:
+      title: Login
+      type: object
+      properties:
+        accessToken:
+          type: string
+        provider:
+          $ref: '#/components/schemas/Provider22'
+    Provider22:
+      title: Provider22
+      enum:
+        - Google
+        - Facebook
+      type: string
+      example: Google
+      x-enum-elements:
+        - name: Google
+          description: ''
+        - name: Facebook
+          description: ''
+    Profile:
+      title: Profile
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        username:
+          type: string
+        about:
+          type: string
+        email:
+          type: string
+        gender:
+          $ref: '#/components/schemas/Gender'
+        birthday:
+          type: string
+          format: date
+        createdOn:
+          type: string
+          format: date-time
+        isEmailConfirmed:
+          type: boolean
+        isNewbie:
+          type: boolean
+        isSocial:
+          type: boolean
+        isVerified:
+          type: boolean
+        isTippable:
+          type: boolean
+        isBetaUser:
+          type: boolean
+        hasPassword:
+          type: boolean
+        location:
+          $ref: '#/components/schemas/Location'
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/Genre'
+          description: ''
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/Skill'
+          description: ''
+        badges:
+          type: array
+          items:
+            type: string
+          description: ''
+        counters:
+          $ref: '#/components/schemas/UserCounters'
+        picture:
+          $ref: '#/components/schemas/Picture'
+        ftue:
+          $ref: '#/components/schemas/UserExperience'
+    Location:
+      title: Location
+      type: object
+      properties:
+        city:
+          type: string
+        country:
+          type: string
+        Coordinates:
+          $ref: '#/components/schemas/GeoCoordinate'
+    GeoCoordinate:
+      title: GeoCoordinate
+      type: object
+      properties:
+        latitude:
+          type: number
+        longitude:
+          type: number
+    Genre:
+      title: Genre
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Skill:
+      title: Skill
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    UserCounters:
+      title: UserCounters
+      type: object
+      properties:
+        followers:
+          type: integer
+          format: int32
+        following:
+          type: integer
+          format: int32
+        bands:
+          type: integer
+          format: int32
+        collections:
+          type: integer
+          format: int32
+    Picture:
+      title: Picture
+      type: object
+      properties:
+        url:
+          type: string
+        isDefault:
+          type: boolean
+        s:
+          type: string
+        m:
+          type: string
+        l:
+          type: string
+    UserExperience:
+      title: UserExperience
+      type: object
+      properties:
+        confirmedEmail:
+          type: boolean
+        createdSong:
+          type: boolean
+        createdBand:
+          type: boolean
+        setPicture:
+          type: boolean
+        setCustomUsername:
+          type: boolean
+        setSkills:
+          type: boolean
+        setGenres:
+          type: boolean
+    ProfileCounters:
+      title: ProfileCounters
+      type: object
+      properties:
+        followers:
+          type: integer
+          format: int32
+        following:
+          type: integer
+          format: int32
+        bands:
+          type: integer
+          format: int32
+        collections:
+          type: integer
+          format: int32
+        notifications:
+          type: integer
+          format: int32
+        invites:
+          type: integer
+          format: int32
+    User:
+      title: User
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        username:
+          type: string
+        about:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+        isVerified:
+          type: boolean
+        isTippable:
+          type: boolean
+        location:
+          $ref: '#/components/schemas/Location'
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/Genre'
+          description: ''
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/Skill'
+          description: ''
+        badges:
+          type: array
+          items:
+            type: string
+          description: ''
+        counters:
+          $ref: '#/components/schemas/UserCounters'
+        picture:
+          $ref: '#/components/schemas/Picture'
+    UserList:
+      title: UserList
+      type: object
+      properties:
+        paging:
+          $ref: '#/components/schemas/Paging'
+        data:
+          type: array
+          items:
+            type: object
+          description: ''
+    Paging:
+      title: Paging
+      type: object
+      properties:
+        limit:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        itemsCount:
+          type: integer
+          format: int32
+        cursors:
+          $ref: '#/components/schemas/Cursors'
+    Cursors:
+      title: Cursors
+      type: object
+      properties:
+        after:
+          type: string
+        before:
+          type: string
+    Creator:
+      title: Creator
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        username:
+          type: string
+        isVerified:
+          type: boolean
+        picture:
+          $ref: '#/components/schemas/Picture'
+    UserSummary:
+      title: UserSummary
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        username:
+          type: string
+        isVerified:
+          type: boolean
+        picture:
+          $ref: '#/components/schemas/Picture'
+        counters:
+          $ref: '#/components/schemas/UserCounters'
+    UserSummaryList:
+      title: UserSummaryList
+      type: object
+      properties:
+        paging:
+          $ref: '#/components/schemas/Paging'
+        data:
+          type: array
+          items:
+            type: object
+          description: ''
+    Band:
+      title: Band
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: string
+          format: uuid
+        username:
+          type: string
+        about:
+          type: string
+        isOpen:
+          type: boolean
+        creator:
+          $ref: '#/components/schemas/Creator'
+        createdOn:
+          type: string
+          format: date-time
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/Genre'
+          description: ''
+        counters:
+          $ref: '#/components/schemas/BandCounters'
+        conversationId:
+          type: string
+          format: uuid
+        picture:
+          $ref: '#/components/schemas/Picture'
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupMemberSummary'
+          description: ''
+    BandCounters:
+      title: BandCounters
+      type: object
+      properties:
+        members:
+          type: integer
+          format: int32
+    GroupMemberSummary:
+      title: GroupMemberSummary
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        username:
+          type: string
+    BandSummary:
+      title: BandSummary
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        username:
+          type: string
+        counters:
+          $ref: '#/components/schemas/BandCounters'
+        picture:
+          $ref: '#/components/schemas/Picture'
+    BandList:
+      title: BandList
+      type: object
+      properties:
+        paging:
+          $ref: '#/components/schemas/Paging'
+        data:
+          type: array
+          items:
+            type: object
+          description: ''
+    BandSummaryList:
+      title: BandSummaryList
+      type: object
+      properties:
+        paging:
+          $ref: '#/components/schemas/Paging'
+        data:
+          type: array
+          items:
+            type: object
+          description: ''
+    GroupMember:
+      title: GroupMember
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        username:
+          type: string
+        about:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+        isVerified:
+          type: boolean
+        isTippable:
+          type: boolean
+        location:
+          $ref: '#/components/schemas/Location'
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/Genre'
+          description: ''
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/Skill'
+          description: ''
+        badges:
+          type: array
+          items:
+            type: string
+          description: ''
+        counters:
+          $ref: '#/components/schemas/UserCounters'
+        picture:
+          $ref: '#/components/schemas/Picture'
+        role:
+          $ref: '#/components/schemas/Role'
+    Role:
+      title: Role
+      enum:
+        - None
+        - Member
+        - Admin
+        - Owner
+      type: string
+      example: None
+      x-enum-elements:
+        - name: None
+          description: ''
+        - name: Member
+          description: ''
+        - name: Admin
+          description: ''
+        - name: Owner
+          description: ''
+    GroupMemberList:
+      title: GroupMemberList
+      type: object
+      properties:
+        paging:
+          $ref: '#/components/schemas/Paging'
+        data:
+          type: array
+          items:
+            type: object
+          description: ''
+    Community:
+      title: Community
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: string
+          format: uuid
+        username:
+          type: string
+        about:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type'
+        isCommentsEnabled:
+          type: boolean
+        creator:
+          $ref: '#/components/schemas/Creator'
+        createdOn:
+          type: string
+          format: date-time
+        counters:
+          $ref: '#/components/schemas/CommunityCounters'
+        picture:
+          $ref: '#/components/schemas/Picture'
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupMemberSummary'
+          description: ''
+    Type:
+      title: Type
+      enum:
+        - Public
+        - Private
+        - Closed
+      type: string
+      example: Public
+      x-enum-elements:
+        - name: Public
+          description: ''
+        - name: Private
+          description: ''
+        - name: Closed
+          description: ''
+    CommunityCounters:
+      title: CommunityCounters
+      type: object
+      properties:
+        members:
+          type: integer
+          format: int32
+    CommunitySummary:
+      title: CommunitySummary
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        username:
+          type: string
+        about:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type'
+        createdOn:
+          type: string
+          format: date-time
+        counters:
+          $ref: '#/components/schemas/CommunityCounters'
+        picture:
+          $ref: '#/components/schemas/Picture'
+    CommunityList:
+      title: CommunityList
+      type: object
+      properties:
+        paging:
+          $ref: '#/components/schemas/Paging'
+        data:
+          type: array
+          items:
+            type: object
+          description: ''
+    Song:
+      title: Song
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: string
+          format: uuid
+        slug:
+          type: string
+        description:
+          type: string
+        isForkable:
+          type: boolean
+        isPublic:
+          type: boolean
+        isFork:
+          type: boolean
+        creator:
+          $ref: '#/components/schemas/Creator'
+        createdOn:
+          type: string
+          format: date-time
+        modifiedOn:
+          type: string
+          format: date-time
+        counters:
+          $ref: '#/components/schemas/SongCounters'
+        picture:
+          $ref: '#/components/schemas/Picture'
+        original:
+          $ref: '#/components/schemas/SongOriginal'
+        author:
+          $ref: '#/components/schemas/Author'
+        collaborators:
+          type: array
+          items:
+            $ref: '#/components/schemas/Collaborator'
+          description: ''
+    SongCounters:
+      title: SongCounters
+      type: object
+      properties:
+        publicRevisions:
+          type: integer
+          format: int32
+        plays:
+          type: integer
+          format: int32
+        likes:
+          type: integer
+          format: int32
+        comments:
+          type: integer
+          format: int32
+        forks:
+          type: integer
+          format: int32
+        collaborators:
+          type: integer
+          format: int32
+    SongOriginal:
+      title: SongOriginal
+      type: object
+      properties:
+        songId:
+          type: string
+          format: uuid
+        revisionId:
+          type: string
+          format: uuid
+        name:
+          type: string
+        creatorName:
+          type: string
+        picture:
+          $ref: '#/components/schemas/Picture'
+    Author:
+      title: Author
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          $ref: '#/components/schemas/Type59'
+        name:
+          type: string
+        username:
+          type: string
+        conversationId:
+          type: string
+          format: uuid
+    Type59:
+      title: Type59
+      enum:
+        - User
+        - Band
+      type: string
+      example: User
+      x-enum-elements:
+        - name: User
+          description: ''
+        - name: Band
+          description: ''
+    Collaborator:
+      title: Collaborator
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        username:
+          type: string
+        counters:
+          $ref: '#/components/schemas/UserCounters'
+        picture:
+          $ref: '#/components/schemas/Picture'
+    SongList:
+      title: SongList
+      type: object
+      properties:
+        paging:
+          $ref: '#/components/schemas/Paging'
+        data:
+          type: array
+          items:
+            type: object
+          description: ''
+    SongSummary:
+      title: SongSummary
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        slug:
+          type: string
+        description:
+          type: string
+        isForkable:
+          type: boolean
+        isPublic:
+          type: boolean
+        isFork:
+          type: boolean
+        createdOn:
+          type: string
+          format: date-time
+        counters:
+          $ref: '#/components/schemas/SongCounters'
+        picture:
+          $ref: '#/components/schemas/Picture'
+        original:
+          $ref: '#/components/schemas/SongOriginal'
+        author:
+          $ref: '#/components/schemas/Author'
+    CollaboratorSummary:
+      title: CollaboratorSummary
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        username:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type59'
+        picture:
+          $ref: '#/components/schemas/Picture'
+    CollaboratorSummaryList:
+      title: CollaboratorSummaryList
+      type: object
+      properties:
+        paging:
+          $ref: '#/components/schemas/Paging'
+        data:
+          type: array
+          items:
+            type: object
+          description: ''
+    Revision:
+      title: Revision
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        parentId:
+          type: string
+          format: uuid
+        postId:
+          type: string
+          format: uuid
+        clientId:
+          $ref: '#/components/schemas/ClientId'
+        description:
+          type: string
+        stamp:
+          type: string
+        isFork:
+          type: boolean
+        isPublic:
+          type: boolean
+        creator:
+          $ref: '#/components/schemas/Creator'
+        createdOn:
+          type: string
+          format: date-time
+        modifiedOn:
+          type: string
+          format: date-time
+        counters:
+          $ref: '#/components/schemas/RevisionCounters'
+        mixdown:
+          $ref: '#/components/schemas/AudioSample'
+        mastering:
+          $ref: '#/components/schemas/Mastering'
+        song:
+          $ref: '#/components/schemas/SongSummary'
+        key:
+          type: string
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/Genre'
+          description: ''
+        samples:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudioSample'
+          description: ''
+        tracks:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudioSample'
+          description: ''
+        auxChannels:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuxChannel'
+          description: ''
+    RevisionCounters:
+      title: RevisionCounters
+      type: object
+      properties:
+        plays:
+          type: integer
+          format: int32
+        likes:
+          type: integer
+          format: int32
+        comments:
+          type: integer
+          format: int32
+        forks:
+          type: integer
+          format: int32
+    AudioSample:
+      title: AudioSample
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        status:
+          $ref: '#/components/schemas/Status'
+    Status:
+      title: Status
+      enum:
+        - Empty
+        - NotReady
+        - Processing
+        - Ready
+        - Corrupted
+      type: string
+      example: Empty
+      x-enum-elements:
+        - name: Empty
+          description: ''
+        - name: NotReady
+          description: ''
+        - name: Processing
+          description: ''
+        - name: Ready
+          description: ''
+        - name: Corrupted
+          description: ''
+    Mastering:
+      title: Mastering
+      type: object
+      properties:
+        preset:
+          type: string
+        drySampleId:
+          type: string
+          format: uuid
+    AuxChannel:
+      title: AuxChannel
+      type: object
+      properties:
+        id:
+          type: string
+        preset:
+          type: string
+        returnLevel:
+          type: number
+        effects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Effect'
+          description: ''
+    Effect:
+      title: Effect
+      type: object
+      properties:
+        slug:
+          type: string
+        bypass:
+          type: boolean
+        params:
+          type: object
+    RevisionSummary:
+      title: RevisionSummary
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        parentId:
+          type: string
+          format: uuid
+        postId:
+          type: string
+          format: uuid
+        clientId:
+          $ref: '#/components/schemas/ClientId'
+        description:
+          type: string
+        stamp:
+          type: string
+        isFork:
+          type: boolean
+        isPublic:
+          type: boolean
+        lyrics:
+          $ref: '#/components/schemas/Lyrics'
+        creator:
+          $ref: '#/components/schemas/Creator'
+        createdOn:
+          type: string
+          format: date-time
+        counters:
+          $ref: '#/components/schemas/RevisionCounters'
+        mixdown:
+          $ref: '#/components/schemas/AudioSample'
+    Lyrics:
+      title: Lyrics
+      type: object
+      properties:
+        content:
+          type: string
+    RevisionList:
+      title: RevisionList
+      type: object
+      properties:
+        paging:
+          $ref: '#/components/schemas/Paging'
+        data:
+          type: array
+          items:
+            type: object
+          description: ''
+    Metronome:
+      title: Metronome
+      type: object
+      properties:
+        signature:
+          $ref: '#/components/schemas/Signature'
+        bpm:
+          type: integer
+          format: int32
+    Signature:
+      title: Signature
+      type: object
+      properties:
+        notesCount:
+          type: integer
+          format: int32
+        noteValue:
+          type: integer
+          format: int32
+    Track:
+      title: Track
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        order:
+          type: integer
+          format: int32
+        type:
+          type: string
+        preset:
+          type: string
+        soundbank:
+          type: string
+        volume:
+          type: number
+        pan:
+          type: number
+        isMuted:
+          type: boolean
+        isSolo:
+          type: boolean
+        isFrozen:
+          type: boolean
+        colorName:
+          $ref: '#/components/schemas/ColorName'
+        automation:
+          $ref: '#/components/schemas/Automation'
+        regionsMix:
+          $ref: '#/components/schemas/Region'
+        regions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Region'
+          description: ''
+        patterns:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pattern'
+          description: ''
+        effects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Effect'
+          description: ''
+        auxSends:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuxSend'
+          description: ''
+    ColorName:
+      title: ColorName
+      enum:
+        - Red
+        - Blue
+        - Violet
+        - Pink
+        - Green
+        - Yellow
+      type: string
+      example: Red
+      x-enum-elements:
+        - name: Red
+          description: ''
+        - name: Blue
+          description: ''
+        - name: Violet
+          description: ''
+        - name: Pink
+          description: ''
+        - name: Green
+          description: ''
+        - name: Yellow
+          description: ''
+    Automation:
+      title: Automation
+      type: object
+      properties:
+        pan:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationPoint'
+          description: ''
+        volume:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomationPoint'
+          description: ''
+    AutomationPoint:
+      title: AutomationPoint
+      type: object
+      properties:
+        position:
+          type: number
+        value:
+          type: number
+    Region:
+      title: Region
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        key:
+          type: string
+        name:
+          type: string
+        startPosition:
+          type: number
+        endPosition:
+          type: number
+        sampleOffset:
+          type: number
+        playbackRate:
+          type: number
+        pitchShift:
+          type: number
+        loopLength:
+          type: number
+        sampleId:
+          type: string
+          format: uuid
+    Pattern:
+      title: Pattern
+      type: object
+      properties:
+        notes:
+          type: array
+          items:
+            type: integer
+            format: int32
+          description: ''
+        sampleId:
+          type: string
+          format: uuid
+    AuxSend:
+      title: AuxSend
+      type: object
+      properties:
+        id:
+          type: string
+        SendLevel:
+          type: integer
+          format: int32
+    VideoSample:
+      title: VideoSample
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        status:
+          $ref: '#/components/schemas/Status'
+        duration:
+          type: number
+        counters:
+          $ref: '#/components/schemas/VideoSampleCounters'
+        picture:
+          $ref: '#/components/schemas/Picture'
+    VideoSampleCounters:
+      title: VideoSampleCounters
+      type: object
+      properties:
+        views:
+          type: integer
+          format: int32
+        likes:
+          type: integer
+          format: int32
+    ImageSample:
+      title: ImageSample
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        counters:
+          $ref: '#/components/schemas/ImageSampleCounters'
+        picture:
+          $ref: '#/components/schemas/Picture'
+    ImageSampleCounters:
+      title: ImageSampleCounters
+      type: object
+      properties:
+        likes:
+          type: integer
+          format: int32
+    Badge:
+      title: Badge
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Blur:
+      title: Blur
+      type: object
+      properties:
+        s:
+          type: string
+        m:
+          type: string
+        l:
+          type: string
+    Post:
+      title: Post
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        caption:
+          type: string
+        message:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type95'
+        clientId:
+          $ref: '#/components/schemas/ClientId'
+        creator:
+          $ref: '#/components/schemas/Creator'
+        createdOn:
+          type: string
+          format: date-time
+        counters:
+          $ref: '#/components/schemas/PostCounters'
+        revision:
+          $ref: '#/components/schemas/RevisionSummary'
+        video:
+          $ref: '#/components/schemas/VideoSample'
+        image:
+          $ref: '#/components/schemas/ImageSample'
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+          description: ''
+    Type95:
+      title: Type95
+      enum:
+        - Revision
+        - Image
+        - Video
+        - Text
+      type: string
+      example: Revision
+      x-enum-elements:
+        - name: Revision
+          description: ''
+        - name: Image
+          description: ''
+        - name: Video
+          description: ''
+        - name: Text
+          description: ''
+    PostCounters:
+      title: PostCounters
+      type: object
+      properties:
+        reposts:
+          type: integer
+          format: int32
+        likes:
+          type: integer
+          format: int32
+        comments:
+          type: integer
+          format: int32
+    Comment:
+      title: Comment
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        content:
+          type: string
+        timestamp:
+          type: number
+        creator:
+          $ref: '#/components/schemas/Creator'
+        createdOn:
+          type: string
+          format: date-time
+    PostList:
+      title: PostList
+      type: object
+      properties:
+        paging:
+          $ref: '#/components/schemas/Paging'
+        data:
+          type: array
+          items:
+            type: object
+          description: ''
+    CommentList:
+      title: CommentList
+      type: object
+      properties:
+        paging:
+          $ref: '#/components/schemas/Paging'
+        data:
+          type: array
+          items:
+            type: object
+          description: ''
+    Collection:
+      title: Collection
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: string
+          format: uuid
+        description:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type102'
+        isPublic:
+          type: boolean
+        creator:
+          $ref: '#/components/schemas/Creator'
+        createdOn:
+          type: string
+          format: date-time
+        lastUpdatedOn:
+          type: string
+          format: date-time
+        counters:
+          $ref: '#/components/schemas/CollectionCounters'
+        picture:
+          $ref: '#/components/schemas/Picture'
+        posts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Post'
+          description: ''
+    Type102:
+      title: Type102
+      enum:
+        - Playlist
+        - Album
+      type: string
+      example: Playlist
+      x-enum-elements:
+        - name: Playlist
+          description: ''
+        - name: Album
+          description: ''
+    CollectionCounters:
+      title: CollectionCounters
+      type: object
+      properties:
+        items:
+          type: integer
+          format: int32
+        likes:
+          type: integer
+          format: int32
+    CollectionSummary:
+      title: CollectionSummary
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type102'
+        isPublic:
+          type: boolean
+        creator:
+          $ref: '#/components/schemas/Creator'
+        createdOn:
+          type: string
+          format: date-time
+        lastUpdatedOn:
+          type: string
+          format: date-time
+        counters:
+          $ref: '#/components/schemas/CollectionCounters'
+        picture:
+          $ref: '#/components/schemas/Picture'
+    CollectionList:
+      title: CollectionList
+      type: object
+      properties:
+        paging:
+          $ref: '#/components/schemas/Paging'
+        data:
+          type: array
+          items:
+            type: object
+          description: ''
+    PostPosition:
+      title: PostPosition
+      type: object
+      properties:
+        order:
+          type: integer
+          format: int32
+    Invite:
+      title: Invite
+      required:
+        - message
+      type: object
+      properties:
+        message:
+          type: string
+        id:
+          type: string
+          format: uuid
+        text:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type109'
+        email:
+          type: string
+        sender:
+          $ref: '#/components/schemas/UserSummary'
+        user:
+          $ref: '#/components/schemas/UserSummary'
+        createdOn:
+          type: string
+          format: date-time
+        isUserRequest:
+          type: boolean
+        band:
+          $ref: '#/components/schemas/BandSummary'
+        song:
+          $ref: '#/components/schemas/SongSummary'
+        community:
+          $ref: '#/components/schemas/CommunitySummary'
+    Type109:
+      title: Type109
+      enum:
+        - RequestToBand
+        - RequestToSong
+        - RequestToCommunity
+        - InviteToBand
+        - InviteToSong
+        - InviteToCommunity
+        - ExternalInviteToBand
+        - ExternalInviteToSong
+        - ExternalInviteToBandLab
+      type: string
+      example: RequestToBand
+      x-enum-elements:
+        - name: RequestToBand
+          description: ''
+        - name: RequestToSong
+          description: ''
+        - name: RequestToCommunity
+          description: ''
+        - name: InviteToBand
+          description: ''
+        - name: InviteToSong
+          description: ''
+        - name: InviteToCommunity
+          description: ''
+        - name: ExternalInviteToBand
+          description: ''
+        - name: ExternalInviteToSong
+          description: ''
+        - name: ExternalInviteToBandLab
+          description: ''
+    InviteSummary:
+      title: InviteSummary
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        message:
+          type: string
+        text:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type109'
+    InviteList:
+      title: InviteList
+      type: object
+      properties:
+        paging:
+          $ref: '#/components/schemas/Paging'
+        data:
+          type: array
+          items:
+            type: object
+          description: ''
+    InviteBatchRequest:
+      title: InviteBatchRequest
+      type: object
+      properties:
+        userIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: ''
+        emails:
+          type: array
+          items:
+            type: string
+          description: ''
+        message:
+          type: string
+    Report:
+      title: Report
+      type: object
+      properties:
+        reportType:
+          type: string
+        objectType:
+          type: string
+        objectId:
+          type: string
+        description:
+          type: string
+    Feedback:
+      title: Feedback
+      type: object
+      properties:
+        reportType:
+          type: string
+        description:
+          type: string
+    GlobalSearchResult:
+      title: GlobalSearchResult
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type117'
+        user:
+          $ref: '#/components/schemas/UserSummary'
+        band:
+          $ref: '#/components/schemas/BandSummary'
+        song:
+          $ref: '#/components/schemas/SongSummary'
+        collection:
+          $ref: '#/components/schemas/CollectionSummary'
+    Type117:
+      title: Type117
+      enum:
+        - User
+        - Band
+        - Song
+        - Collection
+      type: string
+      example: User
+      x-enum-elements:
+        - name: User
+          description: ''
+        - name: Band
+          description: ''
+        - name: Song
+          description: ''
+        - name: Collection
+          description: ''
+    GlobalSearchList:
+      title: GlobalSearchList
+      type: object
+      properties:
+        paging:
+          $ref: '#/components/schemas/Paging'
+        data:
+          type: array
+          items:
+            type: object
+          description: ''
+    Notification:
+      title: Notification
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        from:
+          $ref: '#/components/schemas/NotificationObject'
+        object:
+          $ref: '#/components/schemas/NotificationObject'
+        action:
+          type: string
+        unread:
+          type: boolean
+        message:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+    NotificationObject:
+      title: NotificationObject
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+        name:
+          type: string
+        username:
+          type: string
+        picture:
+          $ref: '#/components/schemas/Picture'
+    NotificationList:
+      title: NotificationList
+      type: object
+      properties:
+        paging:
+          $ref: '#/components/schemas/Paging'
+        data:
+          type: array
+          items:
+            type: object
+          description: ''
+    NotificationPatch:
+      title: NotificationPatch
+      type: object
+      properties:
+        unread:
+          type: boolean
+        lastReadOn:
+          type: string
+          format: date-time
+        ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: ''
+    EmailConfirmation:
+      title: EmailConfirmation
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+        code:
+          type: string
+    Device:
+      title: Device
+      type: object
+      properties:
+        deviceId:
+          type: string
+        pnsId:
+          type: string
+        platfrom:
+          $ref: '#/components/schemas/Platfrom'
+    Platfrom:
+      title: Platfrom
+      enum:
+        - Gcm
+        - Apns
+      type: string
+      example: Gcm
+      x-enum-elements:
+        - name: Gcm
+          description: ''
+        - name: Apns
+          description: ''
+    LabelArray:
+      title: LabelArray
+      type: object
+      properties:
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/Genre'
+          description: ''
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/Skill'
+          description: ''
+        badges:
+          type: array
+          items:
+            $ref: '#/components/schemas/Badge'
+          description: ''
+    LayerIdentityTokenRequest:
+      title: LayerIdentityTokenRequest
+      required:
+        - nonce
+      type: object
+      properties:
+        nonce:
+          type: string
+    LayerIdentityToken:
+      title: LayerIdentityToken
+      type: object
+      properties:
+        token:
+          type: string
+    ClientVersion:
+      title: ClientVersion
+      type: object
+      properties:
+        min:
+          type: string
+        last:
+          type: string
+        url:
+          type: string
+        message:
+          type: string
+    ListResponse:
+      title: ListResponse
+      type: object
+      properties:
+        paging:
+          $ref: '#/components/schemas/Paging'
+        data:
+          type: array
+          items:
+            type: object
+          description: ''
+    ValidationResult:
+      title: ValidationResult
+      type: object
+      properties:
+        isValid:
+          type: boolean
+        isAvailable:
+          type: boolean
+    ValueResponse:
+      title: ValueResponse
+      type: object
+      properties:
+        value:
+          type: boolean
+    ErrorResponse:
+      title: ErrorResponse
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    Sort:
+      title: sort
+      enum:
+        - recent
+        - popular
+        - inspiring
+      type: string
+      example: recent
+      x-enum-elements:
+        - name: recent
+          description: ''
+        - name: popular
+          description: ''
+        - name: inspiring
+          description: ''
+    ReturnsNumberOfAllNotificationsresponse:
+      title: Returns number of all notificationsResponse
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+    GeneratesoneTimeaccesskeyresponse:
+      title: Generates one-time access keyResponse
+      type: object
+      properties:
+        key:
+          type: string
+    ProviderType139:
+      title: providerType139
+      enum:
+        - Google
+        - Facebook
+      type: string
+      example: Google
+      x-enum-elements:
+        - name: Google
+          description: ''
+        - name: Facebook
+          description: ''
+
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid
+
+  securitySchemes:
+    Authorization:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - Authorization: []

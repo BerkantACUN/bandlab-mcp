@@ -1,0 +1,162 @@
+# BandLab effects reference
+
+Every value here was read from live revisions on `www.bandlab.com/api/v1.3`, not from documentation —
+BandLab publishes none. Treat it as an observed sample, not a complete catalogue.
+
+**The machine-readable version is [effects-catalogue.json](effects-catalogue.json)** — currently
+54 slugs harvested from 50 projects and 50 community
+presets. Regenerate it with `scripts/harvest-effects.mjs`. This page is the prose companion: it explains
+the parts that a parameter dump cannot.
+
+BandLab's UI exposes roughly 90 pedals, so anything absent from the catalogue simply has not been seen
+yet, not proven nonexistent.
+
+## Where effects actually live
+
+A track has two effect-shaped fields, and only one of them is the chain:
+
+```jsonc
+{
+  "effects": [ { "slug": "compressor", "bypass": false, "params": {...}, "automation": {} } ],
+  "effectsData": { "displayName": "Studio Vocals", "link": "https://...", "originalPresetId": "aaa4..." }
+}
+```
+
+- **`effects[]`** is the real signal chain, in order. This is what `add_effect`, `remove_effect`,
+  `set_effect_bypass` and `set_effect_params` operate on.
+- **`effectsData`** is preset provenance only — which preset the chain came from, for the UI. Writing
+  effects here does nothing. It is `null` on tracks that never had a preset applied, and
+  `{"displayName": "None", "originalPresetId": null}` on tracks that were reset.
+
+`automation` on an effect maps a param name to a list of automation points. A freshly added effect
+carries an empty object.
+
+## Observed effects
+
+### `compressor`
+
+```json
+{ "attack": 0.001, "knee": 6, "ratio": 4, "release": 0.068, "threshold": -25.3 }
+```
+
+`attack` and `release` are in seconds, `threshold` in dB, `knee` in dB, `ratio` is `n:1`.
+Observed ratios ranged from 4 to 12.1.
+
+### `expGate` — expander / noise gate
+
+```json
+{ "attack": 0.005, "release": 0.2, "threshold": -19.9 }
+```
+
+### `deEsser`
+
+```json
+{ "frequency": 13973, "threshold": -20 }
+```
+
+`frequency` in Hz — the sibilance band being tamed.
+
+### `threeBandEq`
+
+```json
+{ "lowGain": 0, "midGain": 0, "highGain": 19.9, "midFreq": 2000 }
+```
+
+Gains in dB, `midFreq` in Hz (sweepable mid band).
+
+### `bossGE7` — 7-band graphic EQ
+
+```json
+{
+  "gainAt100Hz": -4.6, "gainAt200Hz": -1.9, "gainAt400Hz": 0.6, "gainAt800Hz": -6,
+  "gainAt1600Hz": 6.7, "gainAt3200Hz": 2.1, "gainAt6400Hz": -2.2, "level": 0
+}
+```
+
+All gains in dB. `level` is output trim. Band centres are fixed and encoded in the key names.
+
+### `simpleStudioReverb`
+
+```json
+{ "color": 8.5, "mix": 4.7, "size": 2 }
+```
+
+Note `mix` here is **not** 0..1 — a value of 4.7 was observed, so this control is on its own scale.
+Read the current value before changing it rather than assuming a normalized range.
+
+### `reverbHybrid`
+
+```json
+{ "dampening": 7500, "dryWetMix": 0.31, "irType": "chamberShort", "roomSize": 2.1, "spread": 4.4 }
+```
+
+`dryWetMix` *is* 0..1 here. `irType` is an enum of impulse-response names; `chamberShort` is the only
+one observed so far, so discover others by reading a project that uses them.
+
+## Aux sends
+
+Every inspected project had a single shared reverb bus:
+
+```json
+"auxChannels": [ { "id": "aux1", "preset": "sharedReverb", "returnLevel": 1, "effects": null } ]
+```
+
+Tracks reference it per-track:
+
+```json
+"auxSends": [ { "id": "aux1", "sendLevel": 0, "automation": [] } ]
+```
+
+**`sendLevel` is lowercase.** The community OpenAPI spec spells it `SendLevel`; that is wrong, and
+writing the capitalised key adds a field BandLab ignores.
+
+## Volume automation
+
+```json
+"automation": { "volume": [ {"position": 97.14, "value": 1}, {"position": 97.86, "value": 0} ] }
+```
+
+`position` is in beats, `value` is linear gain on the same 0..2 scale as the fader. Values of exactly
+`0` appear in real projects, so a full mute is legitimate. `automate_volume` takes seconds and converts
+using `metronome.bpm`, because people describe moments as "the drop at 1:12".
+
+Two behaviours matter when cutting a hole in a mix, both found by measuring a render:
+
+- **The lane sits before the track's effect chain.** Muting the fader stops new signal but a reverb or
+  delay keeps ringing, so a hard `value: 0` decays over the tail rather than cutting instantly. With a
+  long spring reverb the gap reached only −30 dB before decaying to −52 dB three seconds later.
+- **`auxSends` bypass the fader entirely.** The shared reverb bus is fed pre-fader, so its return keeps
+  sounding through an automated silence. Set the send to `0` as well when a gap must be clean.
+
+## Observed value ranges
+
+| Field | Observed | Enforced by `mix.ts` |
+|---|---|---|
+| `track.volume` | 0.248 … 1.995 | clamped 0 … 2 |
+| `track.pan` | 0 (no panned tracks in the sample) | clamped −1 … 1 |
+| `track.fxMix` | 1 | clamped 0 … 1 |
+| `revision.volume` (master) | 1 … 1.459 | clamped 0 … 2 |
+| `region.playbackRate` | 1 … 1.567 | must be > 0 |
+
+The top of the volume range (1.995) sits just under 2.0, which is consistent with a 0..2 linear scale
+where 2.0 is roughly +6 dB. It is still an inference, not a documented bound.
+
+## Track types
+
+`voice` (audio), `drum-machine`, `creators-kit` (sampler). A track's `type` decides which fields are
+meaningful — `patterns` and `samplerKit` only appear on instrument tracks.
+
+## Region fields
+
+```jsonc
+{
+  "id": "...", "trackId": "...", "sampleId": "...", "name": "Release_90_SoftKeys_Bm_4bar",
+  "startPosition": 0, "endPosition": 76.596,   // beat units, not seconds
+  "sampleOffset": 0, "loopLength": 0,
+  "playbackRate": 1.567, "pitchShift": 0, "pitchTimeCorrection": true,
+  "gain": 1, "fadeIn": 0, "fadeOut": 0
+}
+```
+
+`gain`, `fadeIn`, `fadeOut` and `pitchTimeCorrection` are all absent from the community spec and were
+found only by reading live data.
