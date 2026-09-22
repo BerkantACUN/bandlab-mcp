@@ -216,3 +216,30 @@ warnings, not verdicts — each was tested on one song.
 harvested projects, so their parameter semantics are thin. `bossGE7`, `tapeSimulator` and
 `simpleStudioReverb` — seen dozens of times — behaved exactly as expected, and the best-measured master
 used only those three.
+
+## Splitter, Mastering and Harmonizer
+
+Three first-party services, mapped from the web app and tested on a real song.
+
+**Splitter** (`scripts/split-stems.mjs`) — free, works. `POST https://source-separation.bandlab.io/v4/separation`
+(multipart: `file`, `stems=vocals,drums,bass,other`, `out_format=m4a`, `daily_limits_enabled=true`), poll
+`GET /v1/separation/status` until `result === 1`, then `GET /v1/separation` returns a zip of stems. Status
+and download take no job id: the service tracks one separation per user. Guitar and piano stems need a
+membership; `429` means the daily limit. A 3:24 song separated in about 30 seconds.
+
+**Mastering** — set `revision.mastering = { preset, intensity, bypass: false }` and re-render. Presets:
+`cdMaster` (the UI's "Universal"), `tapeMaster`, `naturalMastering`, `punchMastering`, `enhanceClarity`,
+`bassBoostMastering`, `spatialMastering`, `cinematicMastering`. It is baked into the mixdown, but on one
+song it always pushed to roughly −12 LUFS and cut LRA from 7.0 to 4.5–5.0, and `intensity` 20 and 50
+rendered identically — the API appears to ignore it. Since streaming normalises to −14 LUFS anyway,
+that extra loudness buys nothing and the lost dynamics stay lost.
+
+**Harmonizer** (`scripts/harmonize.mjs`) — the voice catalogue and presets are free to read, but a full
+render (`POST https://harmonizer.bandlab.cloud/v1/task`) returns `402 Join membership to access this
+feature.` on a free account.
+
+### Upload race
+
+Creating a revision immediately after uploading a batch of samples left its mixdown `Empty` for over
+twelve minutes. Re-posting the identical project rendered in ten seconds. If a render stalls after an
+upload, re-post rather than wait.
